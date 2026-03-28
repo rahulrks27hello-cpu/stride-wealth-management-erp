@@ -87,6 +87,8 @@ const openSidebarButton = document.getElementById("openSidebar");
 const closeSidebarButton = document.getElementById("closeSidebar");
 const pageOverlay = document.getElementById("pageOverlay");
 const periodButtons = Array.from(document.querySelectorAll(".period-button"));
+const themeToggleButton = document.getElementById("themeToggle");
+const themeToggleLabel = document.querySelector("[data-theme-label]");
 const searchInput = document.getElementById("moduleSearch");
 const searchFeedback = document.getElementById("searchFeedback");
 const noResults = document.getElementById("noResults");
@@ -103,6 +105,7 @@ const marketReels = [
     document.getElementById("marketReelClone")
 ];
 let marketNewsIndex = 0;
+const themeStorageKey = "stride-theme";
 
 const marketFeed = [
     { symbol: "SENSEX", meta: "BSE 30", unit: "pts", baseValue: 73583.22, value: 73583.22 },
@@ -224,6 +227,41 @@ const marketNewsData = [
         search: "sensex nifty gains rupee fresh low market tone volatility"
     }
 ];
+
+function getPreferredTheme() {
+    const savedTheme = window.localStorage.getItem(themeStorageKey);
+    if (savedTheme === "light" || savedTheme === "dark") {
+        return savedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+    const isDark = theme === "dark";
+    body.dataset.theme = theme;
+
+    if (!themeToggleButton) {
+        return;
+    }
+
+    themeToggleButton.setAttribute("aria-pressed", String(isDark));
+    themeToggleButton.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+
+    if (themeToggleLabel) {
+        themeToggleLabel.textContent = isDark ? "Dark mode" : "Light mode";
+    }
+}
+
+applyTheme(getPreferredTheme());
+
+if (themeToggleButton) {
+    themeToggleButton.addEventListener("click", () => {
+        const nextTheme = body.dataset.theme === "dark" ? "light" : "dark";
+        window.localStorage.setItem(themeStorageKey, nextTheme);
+        applyTheme(nextTheme);
+    });
+}
 
 function setSidebarState(isOpen) {
     body.classList.toggle("sidebar-open", isOpen);

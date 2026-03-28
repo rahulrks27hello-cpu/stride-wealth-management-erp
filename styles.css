@@ -13,6 +13,14 @@
     --danger: #b42318;
     --neutral: #475467;
     --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    --surface: rgba(255, 255, 255, 0.76);
+    --surface-soft: rgba(255, 255, 255, 0.78);
+    --surface-strong: rgba(255, 255, 255, 0.9);
+    --surface-solid: #ffffff;
+    --body-glow: rgba(15, 61, 115, 0.08);
+    --body-start: #f7f9fc;
+    --brand-surface-bg: linear-gradient(180deg, #ffffff, #f8fafc);
+    --accent-muted: rgba(15, 61, 115, 0.45);
     --radius-xl: 28px;
     --radius-lg: 22px;
 }
@@ -31,10 +39,32 @@ body {
     margin: 0;
     min-width: 320px;
     background:
-        radial-gradient(circle at top right, rgba(15, 61, 115, 0.08), transparent 22rem),
-        linear-gradient(180deg, #f7f9fc 0%, var(--bg) 100%);
+        radial-gradient(circle at top right, var(--body-glow), transparent 22rem),
+        linear-gradient(180deg, var(--body-start) 0%, var(--bg) 100%);
     color: var(--ink);
     font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+body[data-theme="dark"] {
+    --bg: #0b1220;
+    --panel: rgba(15, 23, 42, 0.88);
+    --panel-dark: #08101d;
+    --ink: #e6eefc;
+    --muted: #94a3b8;
+    --line: rgba(148, 163, 184, 0.18);
+    --brand: #79abff;
+    --brand-soft: rgba(121, 171, 255, 0.16);
+    --brand-strong: #dce8ff;
+    --shadow: 0 22px 56px rgba(2, 6, 23, 0.45);
+    --surface: rgba(15, 23, 42, 0.78);
+    --surface-soft: rgba(18, 27, 46, 0.82);
+    --surface-strong: rgba(15, 23, 42, 0.92);
+    --surface-solid: #12203a;
+    --body-glow: rgba(121, 171, 255, 0.18);
+    --body-start: #08101c;
+    --brand-surface-bg: linear-gradient(180deg, #15233d, #0f172a);
+    --accent-muted: rgba(121, 171, 255, 0.55);
+    color-scheme: dark;
 }
 
 img {
@@ -49,6 +79,11 @@ a {
 button,
 input {
     font: inherit;
+}
+
+input::placeholder {
+    color: var(--muted);
+    opacity: 1;
 }
 
 button {
@@ -243,7 +278,56 @@ button {
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.76);
+    background: var(--surface);
+    color: var(--ink);
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink);
+}
+
+.theme-toggle-track {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    border-radius: 999px;
+    background: rgba(15, 61, 115, 0.14);
+    flex-shrink: 0;
+    transition: background-color 0.22s ease;
+}
+
+.theme-toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--surface-solid);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+    transition: transform 0.22s ease, background-color 0.22s ease;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle-track {
+    background: rgba(121, 171, 255, 0.24);
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle-thumb {
+    transform: translateX(20px);
+    background: var(--brand);
+}
+
+.theme-toggle-label {
+    font-size: 0.92rem;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .period-switch {
@@ -251,7 +335,7 @@ button {
     gap: 8px;
     padding: 6px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--surface);
     border: 1px solid var(--line);
 }
 
@@ -281,7 +365,7 @@ button {
     padding: 16px 18px;
     border: 1px solid var(--line);
     border-radius: 24px;
-    background: rgba(255, 255, 255, 0.76);
+    background: var(--surface);
     box-shadow: var(--shadow);
     overflow: hidden;
 }
@@ -344,8 +428,8 @@ button {
     min-width: max-content;
     padding: 12px 14px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(15, 61, 115, 0.1);
+    background: var(--surface-strong);
+    border: 1px solid var(--line);
 }
 
 .market-symbol {
@@ -433,8 +517,8 @@ button {
 .vision-panel {
     max-width: 54ch;
     padding: 18px 20px;
-    border-left: 2px solid rgba(15, 61, 115, 0.16);
-    background: rgba(15, 61, 115, 0.03);
+    border-left: 2px solid var(--line);
+    background: var(--brand-soft);
 }
 
 .vision-label {
@@ -502,8 +586,7 @@ button {
     min-height: 320px;
     display: grid;
     place-items: center;
-    background:
-        linear-gradient(180deg, #ffffff, #f8fafc);
+    background: var(--brand-surface-bg);
     border: 1px solid rgba(15, 61, 115, 0.08);
 }
 
@@ -515,7 +598,7 @@ button {
 .hero-note {
     padding: 18px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.78);
+    background: var(--surface-soft);
     border: 1px solid rgba(15, 61, 115, 0.08);
 }
 
@@ -595,7 +678,7 @@ button {
 }
 
 .trend-chart line {
-    stroke: rgba(15, 61, 115, 0.12);
+    stroke: var(--line);
     stroke-width: 1;
 }
 
@@ -635,7 +718,7 @@ button {
     height: 12px;
     border-radius: 999px;
     overflow: hidden;
-    background: rgba(15, 61, 115, 0.08);
+    background: var(--brand-soft);
 }
 
 .allocation-bar span {
@@ -689,7 +772,7 @@ button {
     position: absolute;
     top: 15px;
     right: 4px;
-    color: rgba(15, 61, 115, 0.45);
+    color: var(--accent-muted);
     font-size: 1.35rem;
     line-height: 1;
 }
@@ -746,7 +829,7 @@ button {
 .market-watch-card,
 .market-news-card {
     border: 1px solid var(--line);
-    background: rgba(255, 255, 255, 0.88);
+    background: var(--surface-strong);
 }
 
 .market-watch-card {
@@ -1017,8 +1100,8 @@ tbody tr:last-child td {
 .stack-item {
     padding: 16px;
     border-radius: 18px;
-    background: rgba(15, 61, 115, 0.05);
-    border: 1px solid rgba(15, 61, 115, 0.08);
+    background: var(--brand-soft);
+    border: 1px solid var(--line);
 }
 
 .stack-item strong {
@@ -1054,7 +1137,7 @@ tbody tr:last-child td {
     height: 48px;
     border: 1px solid var(--line);
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--surface);
     align-items: center;
     justify-content: center;
     gap: 4px;
@@ -1067,6 +1150,18 @@ tbody tr:last-child td {
     height: 2px;
     border-radius: 999px;
     background: var(--brand-strong);
+}
+
+body[data-theme="dark"] .sidebar {
+    background:
+        linear-gradient(180deg, rgba(6, 12, 24, 0.98), rgba(8, 16, 29, 0.98)),
+        var(--panel-dark);
+    border-right-color: rgba(148, 163, 184, 0.12);
+}
+
+body[data-theme="dark"] .brand-surface,
+body[data-theme="dark"] .hero-note {
+    border-color: var(--line);
 }
 
 .page-overlay {
