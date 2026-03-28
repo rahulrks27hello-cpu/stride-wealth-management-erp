@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stride Wealth Management ERP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+            <div class="sidebar-header">
+                <img src="Stride2.png" alt="Stride Wealth Management ERP logo" class="sidebar-wordmark">
+                <button class="text-button sidebar-close" id="closeSidebar" type="button" aria-label="Close navigation menu">Close</button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link is-active" href="#overview">Overview</a>
+                <a class="nav-link" href="#market-watch">Market Watch</a>
+                <a class="nav-link" href="#crm">CRM &amp; Onboarding</a>
+                <a class="nav-link" href="#portfolio">Portfolio &amp; Advisory</a>
+                <a class="nav-link" href="#orders">Order Management</a>
+                <a class="nav-link" href="#risk">Risk &amp; Compliance</a>
+                <a class="nav-link" href="#operations">Operations &amp; Workflow</a>
+                <a class="nav-link" href="#billing">Billing &amp; Finance</a>
+                <a class="nav-link" href="#reporting">Reporting &amp; Service</a>
+            </nav>
+
+            <section class="sidebar-panel">
+                <p class="sidebar-label">Quarter priorities</p>
+                <ul class="sidebar-list">
+                    <li>Cut onboarding turnaround below 48 hours for priority households.</li>
+                    <li>Keep fee realization above 98 percent.</li>
+                    <li>Clear suitability and AML exceptions before cut-off.</li>
+                </ul>
+            </section>
+
+            <section class="sidebar-panel">
+                <p class="sidebar-label">Operating roles</p>
+                <div class="role-grid">
+                    <span class="role-chip">Relationship managers</span>
+                    <span class="role-chip">Advisory desk</span>
+                    <span class="role-chip">Dealers</span>
+                    <span class="role-chip">Compliance</span>
+                    <span class="role-chip">Finance</span>
+                    <span class="role-chip">Client service</span>
+                </div>
+            </section>
+        </aside>
+
+        <div class="page-overlay" id="pageOverlay" hidden></div>
+
+        <main class="workspace">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-button" id="openSidebar" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="topbar-title">
+                        <p class="eyebrow">Advisory, dealing and controls in one place</p>
+                        <h2>Stride Wealth Management ERP</h2>
+                    </div>
+                </div>
+
+                <div class="topbar-controls">
+                    <label class="search-field" for="moduleSearch">
+                        <span>Search</span>
+                        <input id="moduleSearch" type="search" placeholder="Try market, KYC, orders or fees">
+                    </label>
+
+                    <div class="period-switch" role="group" aria-label="Overview period">
+                        <button class="period-button is-selected" type="button" data-period="today">Today</button>
+                        <button class="period-button" type="button" data-period="month">Month</button>
+                        <button class="period-button" type="button" data-period="quarter">Quarter</button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="market-strip" aria-label="Live stock market price fluctuation strip">
+                <div class="market-strip-header">
+                    <span class="live-dot" aria-hidden="true"></span>
+                    <div>
+                        <p class="market-strip-label">Live market pulse</p>
+                        <p class="market-strip-note">Live moves across key indices and stocks</p>
+                    </div>
+                </div>
+
+                <div class="market-strip-window">
+                    <div class="market-track">
+                        <div class="market-reel" id="marketReelPrimary"></div>
+                        <div class="market-reel" id="marketReelClone" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </section>
+
+            <p class="search-feedback" id="searchFeedback">Search markets, clients, orders, billing or reports.</p>
+
+            <section class="panel hero-card searchable-section" id="overview" data-search="overview dashboard executive summary aum revenue performance allocation alerts tasks wealth management erp">
+                <div class="hero-copy">
+                    <span class="eyebrow">Executive overview</span>
+                    <h3>Run the wealth business in one workspace.</h3>
+                    <p class="hero-intro">Manage onboarding, advice, dealing, compliance, billing and reporting in one system.</p>
+
+                    <div class="vision-panel">
+                        <p class="vision-label">Vision statement</p>
+                        <p class="vision-text">Trusted advice, disciplined execution and consistent service.</p>
+                    </div>
+
+                    <div class="hero-actions">
+                        <button class="primary-button" type="button" data-scroll-target="crm">Client onboarding</button>
+                        <button class="secondary-button" type="button" data-scroll-target="reporting">Reporting desk</button>
+                    </div>
+                </div>
+
+                <div class="hero-brand">
+                    <div class="brand-surface">
+                        <img src="Stride1.png" alt="Stride Wealth Management logo" class="hero-mark">
+                    </div>
+                    <div class="hero-note">
+                        <p class="sidebar-label">Priority watch</p>
+                        <h4 data-queue-headline>9 items require action today</h4>
+                        <p data-queue-copy>Suitability, billing and onboarding items are driving the queue.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="metric-grid" aria-label="Key performance indicators">
+                <article class="panel metric-card">
+                    <p class="metric-label">AUM monitored</p>
+                    <h4 data-kpi="aum">INR 1,284 Cr</h4>
+                    <p class="metric-trend" data-kpi-trend="aum">Up 1.8 percent from prior close</p>
+                </article>
+                <article class="panel metric-card">
+                    <p class="metric-label">Net new flows</p>
+                    <h4 data-kpi="flows">INR 6.4 Cr</h4>
+                    <p class="metric-trend" data-kpi-trend="flows">Focused in balanced and tax-efficient products</p>
+                </article>
+                <article class="panel metric-card">
+                    <p class="metric-label">Active households</p>
+                    <h4 data-kpi="households">412</h4>
+                    <p class="metric-trend" data-kpi-trend="households">12 households need review this week</p>
+                </article>
+                <article class="panel metric-card">
+                    <p class="metric-label">Fee realization</p>
+                    <h4 data-kpi="fees">97.8%</h4>
+                    <p class="metric-trend" data-kpi-trend="fees">Three invoices need manual approval</p>
+                </article>
+                <article class="panel metric-card">
+                    <p class="metric-label">Open escalations</p>
+                    <h4 data-kpi="issues">12</h4>
+                    <p class="metric-trend" data-kpi-trend="issues">Mostly compliance and service recovery items</p>
+                </article>
+            </section>
+
+            <section class="overview-grid">
+                <article class="panel chart-card searchable-section" data-search="aum trend performance dashboard growth chart asset allocation executive summary">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="sidebar-label">AUM trend</p>
+                            <h3>Performance monitor</h3>
+                        </div>
+                        <span class="chip" data-range-label>Today</span>
+                    </div>
+
+                    <svg class="trend-chart" viewBox="0 0 320 180" role="img" aria-label="AUM trend line chart">
+                        <line x1="24" y1="24" x2="296" y2="24"></line>
+                        <line x1="24" y1="72" x2="296" y2="72"></line>
+                        <line x1="24" y1="120" x2="296" y2="120"></line>
+                        <line x1="24" y1="156" x2="296" y2="156"></line>
+                        <polyline id="trendLine" points="24,132 62,126 100,118 138,104 176,92 214,88 252,80 290,68"></polyline>
+                    </svg>
+
+                    <div class="chart-footer">
+                        <div>
+                            <p class="metric-label">Suitability due</p>
+                            <strong data-summary="suitability">18 reviews</strong>
+                        </div>
+                        <div>
+                            <p class="metric-label">Pending approvals</p>
+                            <strong data-summary="approvals">6 trades</strong>
+                        </div>
+                        <div>
+                            <p class="metric-label">Cash coverage</p>
+                            <strong data-summary="cash">1.4x</strong>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel allocation-card searchable-section" data-search="asset allocation equity debt alternatives insurance cash mix portfolio allocation">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="sidebar-label">Household allocation</p>
+                            <h3>Asset mix snapshot</h3>
+                        </div>
+                    </div>
+
+                    <div class="allocation-list">
+                        <div class="allocation-row">
+                            <div class="allocation-meta">
+                                <span>Equity</span>
+                                <strong data-allocation-label="equity">42%</strong>
+                            </div>
+                            <div class="allocation-bar"><span data-allocation="equity"></span></div>
+                        </div>
+                        <div class="allocation-row">
+                            <div class="allocation-meta">
+                                <span>Fixed income</span>
+                                <strong data-allocation-label="fixed">28%</strong>
+                            </div>
+                            <div class="allocation-bar"><span data-allocation="fixed"></span></div>
+                        </div>
+                        <div class="allocation-row">
+                            <div class="allocation-meta">
+                                <span>Alternatives</span>
+                                <strong data-allocation-label="alts">16%</strong>
+                            </div>
+                            <div class="allocation-bar"><span data-allocation="alts"></span></div>
+                        </div>
+                        <div class="allocation-row">
+                            <div class="allocation-meta">
+                                <span>Insurance</span>
+                                <strong data-allocation-label="insurance">9%</strong>
+                            </div>
+                            <div class="allocation-bar"><span data-allocation="insurance"></span></div>
+                        </div>
+                        <div class="allocation-row">
+                            <div class="allocation-meta">
+                                <span>Cash</span>
+                                <strong data-allocation-label="cash">5%</strong>
+                            </div>
+                            <div class="allocation-bar"><span data-allocation="cash"></span></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel module-map-card searchable-section" data-search="module map crm onboarding portfolio advisory orders risk operations billing reporting service">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="sidebar-label">Module map</p>
+                            <h3>ERP landscape</h3>
+                        </div>
+                    </div>
+
+                    <div class="module-map">
+                        <a class="module-tile" href="#market-watch">
+                            <strong>Market Watch</strong>
+                            <span>Benchmarks, sectors, news</span>
+                        </a>
+                        <a class="module-tile" href="#crm">
+                            <strong>CRM &amp; Onboarding</strong>
+                            <span>Leads, KYC, client view</span>
+                        </a>
+                        <a class="module-tile" href="#portfolio">
+                            <strong>Portfolio &amp; Advisory</strong>
+                            <span>Mandates, models, rebalancing</span>
+                        </a>
+                        <a class="module-tile" href="#orders">
+                            <strong>Order Management</strong>
+                            <span>Blotter, approvals, settlement</span>
+                        </a>
+                        <a class="module-tile" href="#risk">
+                            <strong>Risk &amp; Compliance</strong>
+                            <span>AML, suitability, audit</span>
+                        </a>
+                        <a class="module-tile" href="#operations">
+                            <strong>Operations &amp; Workflow</strong>
+                            <span>Documents, tasks, service</span>
+                        </a>
+                        <a class="module-tile" href="#billing">
+                            <strong>Billing &amp; Finance</strong>
+                            <span>Fees, invoices, collections</span>
+                        </a>
+                        <a class="module-tile" href="#reporting">
+                            <strong>Reporting &amp; Service</strong>
+                            <span>Statements, tax packs, reviews</span>
+                        </a>
+                    </div>
+                </article>
+            </section>
+
+            <section class="panel module-section market-watch-section searchable-section" id="market-watch" data-search="market watch nifty 50 sensex bank nifty auto it pharma financial services sectors market news headlines flows volatility oil fii">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 01</span>
+                        <h2>Market Watch</h2>
+                        <p>Track benchmarks, sectors and market news in one view.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Benchmark indices</span>
+                        <span class="chip">Sector pulse</span>
+                        <span class="chip">Market news</span>
+                    </div>
+                </div>
+
+                <div class="market-watch-intro">
+                    <div>
+                        <p class="sidebar-label">Market snapshot</p>
+                        <h3>Benchmarks, sectors and headlines</h3>
+                        <p>See the last close, sector tone and latest stories.</p>
+                    </div>
+                    <span class="chip market-sync">Source dates shown on each card</span>
+                </div>
+
+                <div class="market-watch-grid" id="marketWatchGrid" aria-label="Market Watch index and sector charts"></div>
+
+                <div class="market-news-layout">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Desk read</p>
+                                <h3>Market view</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list market-commentary">
+                            <div class="stack-item">
+                                <strong>Risk sentiment stays fragile</strong>
+                                <p>Oil, geopolitics and foreign flows are driving risk.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Sector leadership is rotating</strong>
+                                <p>Defensives and select financials are holding up better.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Rebalancing matters</strong>
+                                <p>Index changes and passive flows are in focus.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Current market news</p>
+                                <h3>News feed</h3>
+                            </div>
+                        </div>
+
+                        <div class="market-news-slider" id="marketNewsSlider" aria-roledescription="carousel" aria-label="Current market news slider">
+                            <div class="market-news-list" id="marketNewsList"></div>
+
+                            <div class="market-news-controls">
+                                <button class="slider-button" id="marketNewsPrev" type="button" aria-label="Show previous market news item">Prev</button>
+                                <div class="market-news-dots" id="marketNewsDots" aria-label="Market news slides"></div>
+                                <button class="slider-button" id="marketNewsNext" type="button" aria-label="Show next market news item">Next</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="crm" data-search="crm onboarding kyc client 360 suitability lead desk referrals document vault household risk profile">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 02</span>
+                        <h2>CRM &amp; Onboarding</h2>
+                        <p>Manage leads, KYC and client records in one flow.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Lead desk</span>
+                        <span class="chip">KYC &amp; suitability</span>
+                        <span class="chip">Client 360</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="lead desk referrals relationship managers segmentation source mix pipeline conversion">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Lead desk</h3>
+                        <p>Track referrals, assign RMs and monitor conversion by segment.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="kyc aml suitability pep sanctions profile onboarding documents">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>KYC &amp; suitability</h3>
+                        <p>Run identity, FATCA, AML, PEP and risk checks.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="client 360 household relationships meeting notes service preferences contact matrix">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Client 360</h3>
+                        <p>View family links, holdings, notes and open items.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Onboarding queue</p>
+                                <h3>Active client files</h3>
+                            </div>
+                            <span class="chip">8 in progress</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Household</th>
+                                        <th>Segment</th>
+                                        <th>Stage</th>
+                                        <th>Risk profile</th>
+                                        <th>Owner</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Kapoor Family Office</td>
+                                        <td>UHNI</td>
+                                        <td><span class="status-chip warning">KYC review</span></td>
+                                        <td>Balanced growth</td>
+                                        <td>R. Mehta</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sharma Advisory Mandate</td>
+                                        <td>HNI</td>
+                                        <td><span class="status-chip success">Ready to activate</span></td>
+                                        <td>Moderate</td>
+                                        <td>M. Iyer</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Virk Trusteeship Desk</td>
+                                        <td>Family office</td>
+                                        <td><span class="status-chip danger">Sanction match</span></td>
+                                        <td>Conservative</td>
+                                        <td>S. Bansal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arora Wealth Circle</td>
+                                        <td>HNWI</td>
+                                        <td><span class="status-chip neutral">Documents pending</span></td>
+                                        <td>Growth</td>
+                                        <td>P. Jain</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Advisor cadence</p>
+                                <h3>Relationship priorities</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>Prospect follow-up</strong>
+                                <p>12 referrals need a first meeting within 72 hours.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Document refresh</strong>
+                                <p>5 clients need updated address proof.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Activation gate</strong>
+                                <p>Mandate, risk form and fee agreement move in one checklist.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="portfolio" data-search="portfolio advisory mandate investment policy model portfolio rebalancing cash allocation performance attribution watchlist">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 03</span>
+                        <h2>Portfolio &amp; Advisory</h2>
+                        <p>Turn client goals and mandate rules into portfolio actions.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Mandates</span>
+                        <span class="chip">Model portfolios</span>
+                        <span class="chip">Rebalancing studio</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="investment policy statement ips goals planning mandate risk capacity">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Mandate &amp; IPS center</h3>
+                        <p>Store IPS rules, ranges and restrictions.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="model portfolios investment committee product shelf allocation templates">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Model portfolio library</h3>
+                        <p>Manage approved house views, product lists and models.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="rebalancing drift breaches cash deployment tactical actions">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Rebalancing studio</h3>
+                        <p>Spot drift, check cash and prepare rebalance actions.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Portfolio watch</p>
+                                <h3>Household allocation monitor</h3>
+                            </div>
+                            <span class="chip">4 drift alerts</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Household</th>
+                                        <th>AUM</th>
+                                        <th>Model</th>
+                                        <th>Drift</th>
+                                        <th>Next action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Kapoor Family Office</td>
+                                        <td>INR 128 Cr</td>
+                                        <td>Balanced legacy</td>
+                                        <td><span class="status-chip warning">Equity +4.2%</span></td>
+                                        <td>Reduce concentrated large-cap exposure</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sharma Advisory Mandate</td>
+                                        <td>INR 42 Cr</td>
+                                        <td>Income plus</td>
+                                        <td><span class="status-chip success">Within band</span></td>
+                                        <td>Monthly review only</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arora Wealth Circle</td>
+                                        <td>INR 18 Cr</td>
+                                        <td>Growth core</td>
+                                        <td><span class="status-chip warning">Cash +3.1%</span></td>
+                                        <td>Deploy idle cash into tactical debt</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nanda Trusteeship</td>
+                                        <td>INR 56 Cr</td>
+                                        <td>Capital preservation</td>
+                                        <td><span class="status-chip danger">Alt exposure -5.0%</span></td>
+                                        <td>Escalate to investment committee</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Advisor workbench</p>
+                                <h3>Current portfolio initiatives</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>House view refresh</strong>
+                                <p>Investment committee calls flow into advisor themes.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Cash deployment plan</strong>
+                                <p>INR 11.8 Cr is ready for debt ladder and allocation moves.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Advisory coverage</strong>
+                                <p>Top 15 revenue households are queued for review.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="orders" data-search="orders trade blotter approvals dealing settlement custody cash check dma order management">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 04</span>
+                        <h2>Order Management</h2>
+                        <p>Run orders, approvals and settlement in one dealing flow.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Trade blotter</span>
+                        <span class="chip">Pre-deal checks</span>
+                        <span class="chip">Settlement desk</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="trade blotter batch orders advisory execution dma order capture">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Trade blotter</h3>
+                        <p>Capture advisor instructions, SIPs and bulk orders.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="pre-trade compliance cash availability breach checks approval routing">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Approval routing</h3>
+                        <p>Check cash, concentration, suitability and restricted lists.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="settlement custody allocation contract notes reconciliation">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Settlement &amp; custody</h3>
+                        <p>Track allocation, contract notes and custodian status.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Trade queue</p>
+                                <h3>Live order blotter</h3>
+                            </div>
+                            <span class="chip">Cut-off 15:10 IST</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Ticket</th>
+                                        <th>Household</th>
+                                        <th>Instrument</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ORD-4812</td>
+                                        <td>Kapoor Family Office</td>
+                                        <td>Large Cap Basket</td>
+                                        <td>INR 2.4 Cr</td>
+                                        <td><span class="status-chip neutral">Awaiting approval</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ORD-4816</td>
+                                        <td>Sharma Advisory Mandate</td>
+                                        <td>Dynamic Bond Fund</td>
+                                        <td>INR 85 L</td>
+                                        <td><span class="status-chip success">Ready for execution</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ORD-4820</td>
+                                        <td>Nanda Trusteeship</td>
+                                        <td>Structured note</td>
+                                        <td>INR 1.2 Cr</td>
+                                        <td><span class="status-chip danger">Suitability hold</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ORD-4827</td>
+                                        <td>Arora Wealth Circle</td>
+                                        <td>Debt ladder roll</td>
+                                        <td>INR 1.1 Cr</td>
+                                        <td><span class="status-chip warning">Cash check pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Execution controls</p>
+                                <h3>Desk checkpoints</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>Restricted list validation</strong>
+                                <p>Two tickets are on hold pending compliance clearance.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Cash verification</strong>
+                                <p>Cash and settlement dates are checked before release.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Custodian hand-off</strong>
+                                <p>Contract notes and allocation files are grouped by custodian.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="risk" data-search="risk compliance aml suitability surveillance stress testing audit trails sebi monitoring">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 05</span>
+                        <h2>Risk &amp; Compliance</h2>
+                        <p>Track AML, suitability and policy breaches.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">AML monitoring</span>
+                        <span class="chip">Suitability engine</span>
+                        <span class="chip">Audit trails</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="aml sanctions pep adverse media transaction monitoring">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>AML &amp; screening</h3>
+                        <p>Monitor sanctions, PEP, adverse media and unusual activity.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="suitability appropriateness product eligibility breaches mandate restrictions">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Suitability engine</h3>
+                        <p>Match product proposals and orders to risk profile and mandate rules.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="stress testing risk concentration scenario analysis audit logs">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Stress testing &amp; audit</h3>
+                        <p>Run concentration, liquidity and scenario checks.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Exception monitor</p>
+                                <h3>Open compliance alerts</h3>
+                            </div>
+                            <span class="chip">5 critical</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Alert</th>
+                                        <th>Household</th>
+                                        <th>Severity</th>
+                                        <th>Assigned to</th>
+                                        <th>Due</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Concentrated exposure breach</td>
+                                        <td>Kapoor Family Office</td>
+                                        <td><span class="status-chip danger">Critical</span></td>
+                                        <td>Compliance desk</td>
+                                        <td>Today</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sanction screening follow-up</td>
+                                        <td>Virk Trusteeship Desk</td>
+                                        <td><span class="status-chip danger">Critical</span></td>
+                                        <td>AML analyst</td>
+                                        <td>Today</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mandate expiry notice</td>
+                                        <td>Nanda Trusteeship</td>
+                                        <td><span class="status-chip warning">High</span></td>
+                                        <td>RM desk</td>
+                                        <td>Tomorrow</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Risk profile stale</td>
+                                        <td>Arora Wealth Circle</td>
+                                        <td><span class="status-chip warning">High</span></td>
+                                        <td>Advisory ops</td>
+                                        <td>2 days</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Control calendar</p>
+                                <h3>Scheduled monitoring</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>Daily trade surveillance</strong>
+                                <p>Review execution exceptions and overrides before close.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Weekly mandate review</strong>
+                                <p>Suitability, IPS and document gaps go to owners every Monday.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Quarterly stress tests</strong>
+                                <p>Measure concentration, drawdown and liquidity risk.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="operations" data-search="operations workflow document vault service desk tasks maker checker checklists sla knowledge base">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 06</span>
+                        <h2>Operations &amp; Workflow</h2>
+                        <p>Manage documents, tasks and service in one layer.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Document vault</span>
+                        <span class="chip">Workflow engine</span>
+                        <span class="chip">Service desk</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="document vault statements agreements id proof digital records indexing">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Document vault</h3>
+                        <p>Store mandates, proofs, statements and agreements with expiry alerts.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="workflow engine maker checker tasks dependencies approvals">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Workflow orchestration</h3>
+                        <p>Route approvals, escalations and SLA timers.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="service desk ticketing client queries callbacks complaints turnaround">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Service desk</h3>
+                        <p>Track calls, complaints and service requests.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Workflow board</p>
+                                <h3>Operational queue</h3>
+                            </div>
+                            <span class="chip">14 SLA timers running</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Source</th>
+                                        <th>Owner</th>
+                                        <th>SLA</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Refresh FATCA declaration</td>
+                                        <td>Client onboarding</td>
+                                        <td>Ops analyst</td>
+                                        <td>6 hrs</td>
+                                        <td><span class="status-chip warning">In progress</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Upload custodian contract note</td>
+                                        <td>Order management</td>
+                                        <td>Dealer support</td>
+                                        <td>2 hrs</td>
+                                        <td><span class="status-chip neutral">Awaiting file</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Respond to service complaint</td>
+                                        <td>Service desk</td>
+                                        <td>Client service</td>
+                                        <td>4 hrs</td>
+                                        <td><span class="status-chip danger">Escalated</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fee exception approval</td>
+                                        <td>Billing</td>
+                                        <td>Finance controller</td>
+                                        <td>8 hrs</td>
+                                        <td><span class="status-chip success">Queued</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Service quality</p>
+                                <h3>Client experience notes</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>Complaint recovery</strong>
+                                <p>Missed-callback cases now trigger reminder timers.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Document expiry watch</strong>
+                                <p>Proofs and mandates are flagged 30 days before expiry.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Operational knowledge base</strong>
+                                <p>Playbooks are grouped by process stage.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="billing" data-search="billing finance fee schedules invoicing receivables gst reconciliation management fees revenue accruals">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 07</span>
+                        <h2>Billing &amp; Finance</h2>
+                        <p>Manage fee rules, invoices and collections in one cycle.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Fee engine</span>
+                        <span class="chip">Invoice run</span>
+                        <span class="chip">Receivables</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="management fees slabs fee schedules billing rules rebates">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Fee engine</h3>
+                        <p>Apply AUM-based schedules, slabs, rebates and minimums.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="invoice run gst tax line items billing cycle delivery">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Invoice run</h3>
+                        <p>Generate invoices with fee breakup, tax and approvals.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="collections receivables aging cash posting revenue recognition">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Receivables control</h3>
+                        <p>Track overdue balances, cash posting and waivers.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Billing cycle</p>
+                                <h3>Latest invoice batch</h3>
+                            </div>
+                            <span class="chip">March close</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Household</th>
+                                        <th>Billing basis</th>
+                                        <th>Invoice value</th>
+                                        <th>Status</th>
+                                        <th>Collector</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Kapoor Family Office</td>
+                                        <td>Quarterly AUM</td>
+                                        <td>INR 48.2 L</td>
+                                        <td><span class="status-chip success">Issued</span></td>
+                                        <td>Finance team</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sharma Advisory Mandate</td>
+                                        <td>Monthly retainership</td>
+                                        <td>INR 6.8 L</td>
+                                        <td><span class="status-chip warning">Approval pending</span></td>
+                                        <td>Controller</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Arora Wealth Circle</td>
+                                        <td>Quarterly AUM</td>
+                                        <td>INR 9.4 L</td>
+                                        <td><span class="status-chip neutral">Draft</span></td>
+                                        <td>Billing ops</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nanda Trusteeship</td>
+                                        <td>Trust services</td>
+                                        <td>INR 13.1 L</td>
+                                        <td><span class="status-chip danger">Collection risk</span></td>
+                                        <td>Finance lead</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Revenue monitor</p>
+                                <h3>Collection focus</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>Realization uplift</strong>
+                                <p>Pre-billing checks catch stale fee agreements and waivers.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Receivable aging</strong>
+                                <p>Three accounts are above 30 days.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Forecasting</strong>
+                                <p>Compare expected fees, collections and waivers by segment.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel module-section searchable-section" id="reporting" data-search="reporting statements tax packs service reviews performance books communication calendar client reporting">
+                <div class="section-header">
+                    <div>
+                        <span class="eyebrow">Module 08</span>
+                        <h2>Reporting &amp; Service</h2>
+                        <p>Run statements, tax packs and review material from one desk.</p>
+                    </div>
+                    <div class="section-chip-group">
+                        <span class="chip">Performance books</span>
+                        <span class="chip">Tax reporting</span>
+                        <span class="chip">Relationship reviews</span>
+                    </div>
+                </div>
+
+                <div class="submodule-grid">
+                    <article class="submodule-card searchable-card" data-search="performance books review decks contribution attribution statements">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Performance books</h3>
+                        <p>Prepare statements, benchmarks and advisor notes.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="capital gains tax packs realized pnl audit statements">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Tax pack center</h3>
+                        <p>Assemble capital gains, realized P&amp;L and dividend summaries.</p>
+                    </article>
+                    <article class="submodule-card searchable-card" data-search="service calendar review meetings communication outreach cadence">
+                        <p class="sidebar-label">Submodule</p>
+                        <h3>Relationship review planner</h3>
+                        <p>Schedule reviews and follow-ups by service tier.</p>
+                    </article>
+                </div>
+
+                <div class="section-grid">
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Reporting calendar</p>
+                                <h3>Upcoming deliverables</h3>
+                            </div>
+                            <span class="chip">11 packs due this week</span>
+                        </div>
+
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Deliverable</th>
+                                        <th>Audience</th>
+                                        <th>Owner</th>
+                                        <th>Due</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Quarterly performance deck</td>
+                                        <td>Kapoor Family Office</td>
+                                        <td>Advisory desk</td>
+                                        <td>Mon</td>
+                                        <td><span class="status-chip warning">Drafting</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Capital gains packet</td>
+                                        <td>Sharma Advisory Mandate</td>
+                                        <td>Reporting ops</td>
+                                        <td>Tue</td>
+                                        <td><span class="status-chip success">Ready</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relationship review note</td>
+                                        <td>Arora Wealth Circle</td>
+                                        <td>RM desk</td>
+                                        <td>Wed</td>
+                                        <td><span class="status-chip neutral">Waiting on commentary</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Service recovery call summary</td>
+                                        <td>Nanda Trusteeship</td>
+                                        <td>Client service</td>
+                                        <td>Today</td>
+                                        <td><span class="status-chip danger">Escalated</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="inner-panel">
+                        <div class="panel-heading">
+                            <div>
+                                <p class="sidebar-label">Service narrative</p>
+                                <h3>Communication standards</h3>
+                            </div>
+                        </div>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <strong>Review pack completeness</strong>
+                                <p>Each pack includes performance, drift, cash and actions.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>Tax readiness</strong>
+                                <p>Capital gains and realized P&amp;L exports stay audit-tagged.</p>
+                            </div>
+                            <div class="stack-item">
+                                <strong>High-touch service cadence</strong>
+                                <p>Top-tier households get quarterly reviews and monthly touchpoints.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel footer-note searchable-section" data-search="connected operating model wealth management erp advisory onboarding orders compliance finance reporting">
+                <div class="panel-heading">
+                    <div>
+                        <p class="sidebar-label">Connected operating model</p>
+                        <h3>Single view across the wealth business</h3>
+                    </div>
+                </div>
+                <p>One workspace for markets, advice, onboarding, dealing, compliance, billing and reporting.</p>
+            </section>
+
+            <div class="no-results panel" id="noResults" hidden>
+                <h3>No modules matched that search.</h3>
+                <p>Try market, onboarding, portfolio, billing or reports.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
