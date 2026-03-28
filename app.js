@@ -87,6 +87,7 @@ const openSidebarButton = document.getElementById("openSidebar");
 const closeSidebarButton = document.getElementById("closeSidebar");
 const pageOverlay = document.getElementById("pageOverlay");
 const periodButtons = Array.from(document.querySelectorAll(".period-button"));
+const heroLogo = document.getElementById("heroLogo");
 const themeToggleButton = document.getElementById("themeToggle");
 const themeToggleLabel = document.querySelector("[data-theme-label]");
 const searchInput = document.getElementById("moduleSearch");
@@ -240,6 +241,13 @@ function getPreferredTheme() {
 function applyTheme(theme) {
     const isDark = theme === "dark";
     body.dataset.theme = theme;
+
+    if (heroLogo) {
+        const nextLogo = isDark ? heroLogo.dataset.darkSrc : heroLogo.dataset.lightSrc;
+        if (nextLogo) {
+            heroLogo.src = nextLogo;
+        }
+    }
 
     if (!themeToggleButton) {
         return;

@@ -70,6 +70,13 @@
                         <input id="moduleSearch" type="search" placeholder="Try market, KYC, orders or fees">
                     </label>
 
+                    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode">
+                        <span class="theme-toggle-track" aria-hidden="true">
+                            <span class="theme-toggle-thumb"></span>
+                        </span>
+                        <span class="theme-toggle-label" data-theme-label>Light mode</span>
+                    </button>
+
                     <div class="period-switch" role="group" aria-label="Overview period">
                         <button class="period-button is-selected" type="button" data-period="today">Today</button>
                         <button class="period-button" type="button" data-period="month">Month</button>
@@ -116,7 +123,13 @@
 
                 <div class="hero-brand">
                     <div class="brand-surface">
-                        <img src="Stride1.png" alt="Stride Wealth Management logo" class="hero-mark">
+                        <img
+                            src="Stride1.png"
+                            alt="Stride Wealth Management logo"
+                            class="hero-mark"
+                            id="heroLogo"
+                            data-light-src="Stride1.png"
+                            data-dark-src="Stride2.png">
                     </div>
                     <div class="hero-note">
                         <p class="sidebar-label">Priority watch</p>
