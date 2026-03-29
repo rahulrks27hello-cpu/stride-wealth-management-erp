@@ -3,7 +3,7 @@ const dashboardData = {
         label: "Today",
         kpis: {
             aum: ["INR 1,284 Cr", "Up 1.8 percent"],
-            flows: ["INR 6.4 Cr", "Balanced and tax-aware products led flows"],
+            flows: ["INR 6.4 Cr", "Balanced and tax-aware products led"],
             households: ["412", "12 reviews due this week"],
             fees: ["97.8%", "3 invoices need approval"],
             issues: ["12", "Mostly compliance and service"]
@@ -15,7 +15,7 @@ const dashboardData = {
         },
         queue: {
             headline: "9 items need action today",
-            copy: "Suitability, billing and onboarding items are driving the queue."
+            copy: "Suitability, billing and onboarding lead the queue."
         },
         allocation: {
             equity: 42,
@@ -30,7 +30,7 @@ const dashboardData = {
         label: "Month",
         kpis: {
             aum: ["INR 1,301 Cr", "Up 4.6 percent this month"],
-            flows: ["INR 42.8 Cr", "Debt and fresh mandates led flows"],
+            flows: ["INR 42.8 Cr", "Debt and new mandates led"],
             households: ["419", "27 reviews completed"],
             fees: ["98.2%", "Exceptions are down"],
             issues: ["8", "Escalations are down"]
@@ -57,7 +57,7 @@ const dashboardData = {
         label: "Quarter",
         kpis: {
             aum: ["INR 1,346 Cr", "Up 8.9 percent this quarter"],
-            flows: ["INR 118 Cr", "Mandate renewals and tactical deployment led growth"],
+            flows: ["INR 118 Cr", "Mandate renewals and tactical deployment led"],
             households: ["431", "Top-tier reviews are current"],
             fees: ["98.6%", "Collections improved"],
             issues: ["5", "Mostly compliance"]
@@ -93,6 +93,12 @@ const themeToggleLabel = document.querySelector("[data-theme-label]");
 const searchInput = document.getElementById("moduleSearch");
 const searchFeedback = document.getElementById("searchFeedback");
 const noResults = document.getElementById("noResults");
+const flowDetailTitle = document.getElementById("flowDetailTitle");
+const flowDetailReceives = document.getElementById("flowDetailReceives");
+const flowDetailSends = document.getElementById("flowDetailSends");
+const flowDetailLinks = document.getElementById("flowDetailLinks");
+const flowDetailPanel = document.getElementById("flowDetailPanel");
+const flowDetailTriggers = Array.from(document.querySelectorAll("[data-flow-title]"));
 const sections = Array.from(document.querySelectorAll(".searchable-section[id]"));
 const navLinks = Array.from(document.querySelectorAll(".nav-link"));
 const marketWatchGrid = document.getElementById("marketWatchGrid");
@@ -316,6 +322,27 @@ document.querySelectorAll("[data-scroll-target]").forEach((button) => {
             target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     });
+});
+
+function updateFlowDetail(trigger) {
+    if (!trigger || !flowDetailTitle || !flowDetailReceives || !flowDetailSends || !flowDetailLinks) {
+        return;
+    }
+
+    if (flowDetailPanel) {
+        flowDetailPanel.hidden = false;
+    }
+
+    flowDetailTitle.textContent = trigger.dataset.flowTitle || "";
+    flowDetailReceives.textContent = trigger.dataset.flowReceives || "";
+    flowDetailSends.textContent = trigger.dataset.flowSends || "";
+    flowDetailLinks.textContent = trigger.dataset.flowLinks || "";
+}
+
+flowDetailTriggers.forEach((trigger) => {
+    const showDetail = () => updateFlowDetail(trigger);
+    trigger.addEventListener("mouseenter", showDetail);
+    trigger.addEventListener("focus", showDetail);
 });
 
 function buildPolyline(points) {
@@ -645,7 +672,7 @@ function applySearchFilter() {
     });
 
     if (!term) {
-        searchFeedback.textContent = "Search flow, markets, clients, orders, billing or reports.";
+        searchFeedback.textContent = "Search modules, clients, orders or reports.";
     } else {
         searchFeedback.textContent = `Showing ${visibleSections} areas for "${term}".`;
     }

@@ -60,7 +60,7 @@
                         <span></span>
                     </button>
                     <div class="topbar-title">
-                        <p class="eyebrow">Advisory, dealing and controls in one place</p>
+                        <p class="eyebrow">Advisory, Dealing and Controls</p>
                         <h2>Stride Wealth Management ERP</h2>
                     </div>
                 </div>
@@ -103,13 +103,13 @@
                 </div>
             </section>
 
-            <p class="search-feedback" id="searchFeedback">Search flow, markets, clients, orders, billing or reports.</p>
+            <p class="search-feedback" id="searchFeedback">Search modules, clients, orders or reports.</p>
 
             <section class="panel hero-card searchable-section" id="overview" data-search="overview dashboard executive summary aum revenue performance allocation alerts tasks wealth management erp">
                 <div class="hero-copy">
                     <span class="eyebrow">Executive overview</span>
-                    <h3>Run the wealth business in one workspace.</h3>
-                    <p class="hero-intro">Manage onboarding, advice, dealing, compliance, billing and reporting in one system.</p>
+                    <h3>Wealth Management operations on one platform.</h3>
+                    <p class="hero-intro">Onboarding, advisory, dealing, controls, billing and reporting on one platform.</p>
 
                     <div class="vision-panel">
                         <p class="vision-label">Vision statement</p>
@@ -168,91 +168,102 @@
                 </article>
             </section>
 
-            <section class="panel flow-section searchable-section" id="operating-flow" data-search="operating flow module connections information flow departments handoffs client master order lifecycle revenue lifecycle market watch crm portfolio orders risk operations billing reporting">
+            <section class="panel flow-section searchable-section" id="operating-flow" data-search="operating flow flow chart module connections information flow departments handoffs client master order lifecycle revenue lifecycle market watch crm portfolio orders risk operations billing reporting">
                 <div class="section-header">
                     <div>
                         <span class="eyebrow">Operating flow</span>
-                        <h2>How the ERP works together</h2>
-                        <p>Every team works on the same operating chain. Client records, advice, orders, controls, settlement, billing and reporting move in one connected flow.</p>
+                        <h2>Flow Chart of the Wealth Management ERP</h2>
+                        <p>Three connected lanes: advisory, execution and revenue.</p>
                     </div>
                     <div class="section-chip-group">
-                        <span class="chip">Front office</span>
-                        <span class="chip">Control layer</span>
-                        <span class="chip">Back office</span>
+                        <span class="chip">Advisory lane</span>
+                        <span class="chip">Execution lane</span>
+                        <span class="chip">Revenue lane</span>
                     </div>
                 </div>
 
-                <div class="flow-stage-rail" aria-label="ERP operating flow">
-                    <article class="flow-stage searchable-card" data-search="market watch house view prices market pulse benchmark input">
-                        <p class="sidebar-label">Step 01</p>
-                        <h3>Market Watch</h3>
-                        <p>Builds the daily market view for advisors and dealers.</p>
-                        <span class="flow-meta">Output: house view and price context</span>
-                    </article>
-                    <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-                    <article class="flow-stage searchable-card" data-search="crm onboarding client master kyc mandate setup referral lead">
-                        <p class="sidebar-label">Step 02</p>
-                        <h3>CRM &amp; Onboarding</h3>
-                        <p>Creates the client master, KYC pack and service profile.</p>
-                        <span class="flow-meta">Output: household record and mandate setup</span>
-                    </article>
-                    <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-                    <article class="flow-stage searchable-card" data-search="portfolio advisory ips model rebalance proposal investment action">
-                        <p class="sidebar-label">Step 03</p>
-                        <h3>Portfolio &amp; Advisory</h3>
-                        <p>Turns goals, mandate rules and market view into advice.</p>
-                        <span class="flow-meta">Output: IPS, model choice and rebalance instruction</span>
-                    </article>
-                    <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-                    <article class="flow-stage searchable-card" data-search="order management dealing execution blotter trade ticket approval">
-                        <p class="sidebar-label">Step 04</p>
-                        <h3>Order Management</h3>
-                        <p>Executes approved instructions and captures the trade trail.</p>
-                        <span class="flow-meta">Output: order ticket, execution and cash movement</span>
-                    </article>
-                    <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-                    <article class="flow-stage searchable-card" data-search="operations workflow settlement custody documents service tasks">
-                        <p class="sidebar-label">Step 05</p>
-                        <h3>Operations &amp; Workflow</h3>
-                        <p>Handles settlement, custody files, documents and SLA work.</p>
-                        <span class="flow-meta">Output: settlement status and service actions</span>
-                    </article>
-                    <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-                    <article class="flow-stage searchable-card" data-search="billing finance fees invoices receivables revenue accrual">
-                        <p class="sidebar-label">Step 06</p>
-                        <h3>Billing &amp; Finance</h3>
-                        <p>Calculates fees from AUM, mandate terms and activity.</p>
-                        <span class="flow-meta">Output: invoice, receivable and fee realization</span>
-                    </article>
-                    <span class="flow-arrow" aria-hidden="true">&rarr;</span>
-                    <article class="flow-stage searchable-card" data-search="reporting service statements tax packs review packs client reporting">
-                        <p class="sidebar-label">Step 07</p>
-                        <h3>Reporting &amp; Service</h3>
-                        <p>Publishes statements, review packs, tax data and service updates.</p>
-                        <span class="flow-meta">Output: client communication and management reporting</span>
-                    </article>
-                </div>
+                <div class="flow-compact-panel">
+                    <p class="flow-hover-note">Hover over a module for inputs, outputs and module links.</p>
 
-                <div class="flow-control-band">
-                    <p class="sidebar-label">Cross-module control layer</p>
-                    <h3>Risk &amp; Compliance sits across onboarding, advice, orders, settlement and billing exceptions before anything is released.</h3>
-                </div>
+                    <div class="flow-chart-grid" aria-label="ERP flow chart">
+                        <div class="flow-row">
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="market-watch" data-search="market watch house view sector pulse benchmark input flow chart" data-flow-title="Market Watch" data-flow-receives="Benchmark prices, sector moves and market news." data-flow-sends="Market context to Portfolio, Order Management and Reporting." data-flow-links="Portfolio &amp; Advisory, Order Management and Reporting &amp; Service.">
+                                <span class="flow-node-step">01</span>
+                                <span class="flow-node-title">Market Watch</span>
+                            </button>
+                            <span class="flow-inline-arrow" aria-hidden="true">&rarr;</span>
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="crm" data-search="crm onboarding client master kyc mandate profile flow chart" data-flow-title="CRM &amp; Onboarding" data-flow-receives="Leads, documents, KYC files and RM inputs." data-flow-sends="Client master, mandate setup and service profile." data-flow-links="Portfolio &amp; Advisory, Risk &amp; Compliance, Billing &amp; Finance and Reporting &amp; Service.">
+                                <span class="flow-node-step">02</span>
+                                <span class="flow-node-title">CRM &amp; Onboarding</span>
+                            </button>
+                            <span class="flow-inline-arrow" aria-hidden="true">&rarr;</span>
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="portfolio" data-search="portfolio advisory ips model rebalancing advice flow chart" data-flow-title="Portfolio &amp; Advisory" data-flow-receives="Client master from CRM and market view from Market Watch." data-flow-sends="IPS decisions, model choice and rebalance instructions." data-flow-links="Market Watch, CRM &amp; Onboarding, Order Management and Reporting &amp; Service.">
+                                <span class="flow-node-step">03</span>
+                                <span class="flow-node-title">Portfolio &amp; Advisory</span>
+                            </button>
+                        </div>
 
-                <div class="flow-lanes">
-                    <article class="lane-card searchable-card" data-search="client master household record kyc mandate profile data flow crm portfolio risk billing reporting">
-                        <p class="sidebar-label">Core record</p>
-                        <h3>Client master</h3>
-                        <p>CRM creates the household record. Portfolio, risk, billing and reporting all read the same KYC, mandate and service data.</p>
-                    </article>
-                    <article class="lane-card searchable-card" data-search="trade lifecycle order trail execution settlement custody cash data flow orders operations reporting billing">
-                        <p class="sidebar-label">Execution record</p>
-                        <h3>Order and settlement trail</h3>
-                        <p>Portfolio sends instructions to dealing. Orders and operations return execution, custody and cash movement data to billing and reporting.</p>
-                    </article>
-                    <article class="lane-card searchable-card" data-search="revenue lifecycle fee schedule invoice receivable reporting service data flow billing finance">
-                        <p class="sidebar-label">Revenue record</p>
-                        <h3>Fee and service trail</h3>
-                        <p>Billing uses mandate terms, AUM and transaction activity. Reporting then publishes fees, holdings, tax data and service actions.</p>
+                        <div class="flow-bridge">Approved advice moves into execution.</div>
+
+                        <div class="flow-row">
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="orders" data-search="orders dealing blotter execution flow chart" data-flow-title="Order Management" data-flow-receives="Trade instructions and dealing requests." data-flow-sends="Execution status, cash movement and trade trail." data-flow-links="Portfolio &amp; Advisory, Operations &amp; Workflow, Billing &amp; Finance and Reporting &amp; Service.">
+                                <span class="flow-node-step">04</span>
+                                <span class="flow-node-title">Order Management</span>
+                            </button>
+                            <span class="flow-inline-arrow" aria-hidden="true">&rarr;</span>
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="operations" data-search="operations workflow settlement custody service flow chart" data-flow-title="Operations &amp; Workflow" data-flow-receives="Executed trades, documents, exceptions and service tasks." data-flow-sends="Settlement status, custody records and workflow outcomes." data-flow-links="Order Management, Risk &amp; Compliance, Billing &amp; Finance and Reporting &amp; Service.">
+                                <span class="flow-node-step">05</span>
+                                <span class="flow-node-title">Operations &amp; Workflow</span>
+                            </button>
+                            <span class="flow-inline-arrow" aria-hidden="true">&rarr;</span>
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="billing" data-search="billing finance invoices fees receivables flow chart" data-flow-title="Billing &amp; Finance" data-flow-receives="Mandate terms, AUM levels, trade activity and settlement outcomes." data-flow-sends="Invoices, receivable status and fee data." data-flow-links="CRM &amp; Onboarding, Operations &amp; Workflow, Risk &amp; Compliance and Reporting &amp; Service.">
+                                <span class="flow-node-step">06</span>
+                                <span class="flow-node-title">Billing &amp; Finance</span>
+                            </button>
+                            <span class="flow-inline-arrow" aria-hidden="true">&rarr;</span>
+                            <button class="flow-node-button searchable-card" type="button" data-scroll-target="reporting" data-search="reporting service statements tax packs review decks flow chart" data-flow-title="Reporting &amp; Service" data-flow-receives="Client, portfolio, trade and fee data." data-flow-sends="Statements, tax packs, review notes and service communication." data-flow-links="Market Watch, CRM &amp; Onboarding, Portfolio &amp; Advisory and Billing &amp; Finance.">
+                                <span class="flow-node-step">07</span>
+                                <span class="flow-node-title">Reporting &amp; Service</span>
+                            </button>
+                        </div>
+
+                        <div class="flow-control-strip">
+                            <p class="sidebar-label">Control layer</p>
+                            <button class="flow-node-button flow-node-control searchable-card" type="button" data-scroll-target="risk" data-search="risk compliance aml suitability audit control layer flow chart" data-flow-title="Risk &amp; Compliance" data-flow-receives="Client data, mandate rules, orders, exceptions and billing overrides." data-flow-sends="Approvals, holds, breach actions and audit updates." data-flow-links="CRM &amp; Onboarding, Portfolio &amp; Advisory, Order Management, Operations &amp; Workflow and Billing &amp; Finance.">
+                                <span class="flow-node-title">Risk &amp; Compliance</span>
+                            </button>
+                        </div>
+
+                        <div class="flow-shared-strip">
+                            <button class="flow-node-button flow-record-button searchable-card" type="button" data-scroll-target="crm" data-search="client master shared record crm portfolio risk billing reporting" data-flow-title="Shared record: Client master" data-flow-receives="Created from KYC, mandate and service setup." data-flow-sends="Used by Portfolio, Risk, Billing and Reporting." data-flow-links="Owned in CRM &amp; Onboarding.">
+                                <span class="flow-node-title">Client master</span>
+                            </button>
+                            <button class="flow-node-button flow-record-button searchable-card" type="button" data-scroll-target="orders" data-search="trade trail shared record orders operations billing reporting" data-flow-title="Shared record: Trade and settlement trail" data-flow-receives="Created when orders are executed and settlement is confirmed." data-flow-sends="Used by Billing and Reporting." data-flow-links="Owned across Order Management and Operations &amp; Workflow.">
+                                <span class="flow-node-title">Trade trail</span>
+                            </button>
+                            <button class="flow-node-button flow-record-button searchable-card" type="button" data-scroll-target="billing" data-search="revenue trail shared record billing reporting service" data-flow-title="Shared record: Revenue and service trail" data-flow-receives="Built from invoices, collections and service updates." data-flow-sends="Used for leadership reporting and client follow-up." data-flow-links="Owned across Billing &amp; Finance and Reporting &amp; Service.">
+                                <span class="flow-node-title">Revenue trail</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <article class="flow-detail-panel" id="flowDetailPanel" aria-live="polite" hidden>
+                        <p class="sidebar-label">Cross-module detail</p>
+                        <h3 id="flowDetailTitle">Hover over a module</h3>
+                        <div class="flow-detail-grid">
+                            <div>
+                                <p class="metric-label">Receives</p>
+                                <p id="flowDetailReceives">Move the pointer over a module to see its incoming records or instructions.</p>
+                            </div>
+                            <div>
+                                <p class="metric-label">Sends</p>
+                                <p id="flowDetailSends">The panel will show what the module passes forward.</p>
+                            </div>
+                            <div>
+                                <p class="metric-label">Connected modules</p>
+                                <p id="flowDetailLinks">This keeps the flow chart clean while still showing cross-module links.</p>
+                            </div>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -337,47 +348,49 @@
                         </div>
                     </div>
                 </article>
+            </section>
 
+            <section class="overview-map-row">
                 <article class="panel module-map-card searchable-section" data-search="module map connection map handoffs data flow crm onboarding portfolio advisory orders risk operations billing reporting service">
                     <div class="panel-heading">
                         <div>
-                            <p class="sidebar-label">Connection map</p>
-                            <h3>How modules hand off work</h3>
+                            <p class="sidebar-label">Module connections</p>
+                            <h3>How work moves across modules</h3>
                         </div>
                     </div>
 
-                    <div class="module-map connection-map">
+                    <div class="module-map connection-map connection-map-grid">
                         <a class="module-tile module-link-row" href="#market-watch">
                             <strong>Market Watch</strong>
-                            <span>Feeds market view, benchmark levels and sector tone into advisory decisions and dealing priorities.</span>
+                            <span>Market context for advisory and dealing.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#crm">
                             <strong>CRM &amp; Onboarding</strong>
-                            <span>Creates the client master used by portfolio, compliance, billing and reporting.</span>
+                            <span>Client master for advisory, controls, billing and reporting.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#portfolio">
                             <strong>Portfolio &amp; Advisory</strong>
-                            <span>Converts client goals and mandate rules into model selection, drift checks and trade instructions.</span>
+                            <span>Advice, model selection and rebalance actions.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#orders">
                             <strong>Order Management</strong>
-                            <span>Captures trade tickets, execution status and cash movement for operations, reporting and fee events.</span>
+                            <span>Trade tickets, execution status and cash movement.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#risk">
                             <strong>Risk &amp; Compliance</strong>
-                            <span>Clears or blocks onboarding, advisory actions, orders and fee exceptions across the chain.</span>
+                            <span>Approvals, holds and control actions.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#operations">
                             <strong>Operations &amp; Workflow</strong>
-                            <span>Completes settlement, documents and SLA work, then passes confirmed records to finance and service.</span>
+                            <span>Settlement, documents and workflow completion.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#billing">
                             <strong>Billing &amp; Finance</strong>
-                            <span>Prices mandates from AUM, trade activity and exceptions, then sends invoices and receivables forward.</span>
+                            <span>Fee pricing, invoices and receivable status.</span>
                         </a>
                         <a class="module-tile module-link-row" href="#reporting">
                             <strong>Reporting &amp; Service</strong>
-                            <span>Combines client, portfolio, trade and fee data into statements, review packs and service updates.</span>
+                            <span>Statements, review packs and client communication.</span>
                         </a>
                     </div>
                 </article>
@@ -388,7 +401,7 @@
                     <div>
                         <span class="eyebrow">Module 01</span>
                         <h2>Market Watch</h2>
-                        <p>Track benchmarks, sectors and market news in one view.</p>
+                        <p>Benchmarks, sectors and market news.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Benchmark indices</span>
@@ -416,7 +429,7 @@
                     <div>
                         <p class="sidebar-label">Market snapshot</p>
                         <h3>Benchmarks, sectors and headlines</h3>
-                        <p>See the last close, sector tone and latest stories.</p>
+                        <p>Latest close, sector tone and key headlines.</p>
                     </div>
                     <span class="chip market-sync">Source dates shown on each card</span>
                 </div>
@@ -474,7 +487,7 @@
                     <div>
                         <span class="eyebrow">Module 02</span>
                         <h2>CRM &amp; Onboarding</h2>
-                        <p>Manage leads, KYC and client records in one flow.</p>
+                        <p>Leads, KYC and client records.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Lead desk</span>
@@ -502,12 +515,12 @@
                     <article class="submodule-card searchable-card" data-search="lead desk referrals relationship managers segmentation source mix pipeline conversion">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Lead desk</h3>
-                        <p>Track referrals, assign RMs and monitor conversion by segment.</p>
+                        <p>Referrals, RM assignment and conversion.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="kyc aml suitability pep sanctions profile onboarding documents">
                         <p class="sidebar-label">Submodule</p>
                         <h3>KYC &amp; suitability</h3>
-                        <p>Run identity, FATCA, AML, PEP and risk checks.</p>
+                        <p>Identity, FATCA, AML, PEP and risk checks.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="client 360 household relationships meeting notes service preferences contact matrix">
                         <p class="sidebar-label">Submodule</p>
@@ -602,7 +615,7 @@
                     <div>
                         <span class="eyebrow">Module 03</span>
                         <h2>Portfolio &amp; Advisory</h2>
-                        <p>Turn client goals and mandate rules into portfolio actions.</p>
+                        <p>Mandates, models and rebalance actions.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Mandates</span>
@@ -635,12 +648,12 @@
                     <article class="submodule-card searchable-card" data-search="model portfolios investment committee product shelf allocation templates">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Model portfolio library</h3>
-                        <p>Manage approved house views, product lists and models.</p>
+                        <p>Approved house views, product lists and models.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="rebalancing drift breaches cash deployment tactical actions">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Rebalancing studio</h3>
-                        <p>Spot drift, check cash and prepare rebalance actions.</p>
+                        <p>Drift, cash checks and rebalance actions.</p>
                     </article>
                 </div>
 
@@ -730,7 +743,7 @@
                     <div>
                         <span class="eyebrow">Module 04</span>
                         <h2>Order Management</h2>
-                        <p>Run orders, approvals and settlement in one dealing flow.</p>
+                        <p>Orders, approvals and settlement.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Trade blotter</span>
@@ -768,7 +781,7 @@
                     <article class="submodule-card searchable-card" data-search="settlement custody allocation contract notes reconciliation">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Settlement &amp; custody</h3>
-                        <p>Track allocation, contract notes and custodian status.</p>
+                        <p>Allocation, contract notes and custodian status.</p>
                     </article>
                 </div>
 
@@ -858,7 +871,7 @@
                     <div>
                         <span class="eyebrow">Module 05</span>
                         <h2>Risk &amp; Compliance</h2>
-                        <p>Track AML, suitability and policy breaches.</p>
+                        <p>AML, suitability and policy breaches.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">AML monitoring</span>
@@ -886,17 +899,17 @@
                     <article class="submodule-card searchable-card" data-search="aml sanctions pep adverse media transaction monitoring">
                         <p class="sidebar-label">Submodule</p>
                         <h3>AML &amp; screening</h3>
-                        <p>Monitor sanctions, PEP, adverse media and unusual activity.</p>
+                        <p>Sanctions, PEP, adverse media and unusual activity.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="suitability appropriateness product eligibility breaches mandate restrictions">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Suitability engine</h3>
-                        <p>Match product proposals and orders to risk profile and mandate rules.</p>
+                        <p>Product checks against risk profile and mandate.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="stress testing risk concentration scenario analysis audit logs">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Stress testing &amp; audit</h3>
-                        <p>Run concentration, liquidity and scenario checks.</p>
+                        <p>Concentration, liquidity and scenario checks.</p>
                     </article>
                 </div>
 
@@ -986,7 +999,7 @@
                     <div>
                         <span class="eyebrow">Module 06</span>
                         <h2>Operations &amp; Workflow</h2>
-                        <p>Manage documents, tasks and service in one layer.</p>
+                        <p>Documents, workflows and service tasks.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Document vault</span>
@@ -1014,7 +1027,7 @@
                     <article class="submodule-card searchable-card" data-search="document vault statements agreements id proof digital records indexing">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Document vault</h3>
-                        <p>Store mandates, proofs, statements and agreements with expiry alerts.</p>
+                        <p>Mandates, proofs, statements and expiry alerts.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="workflow engine maker checker tasks dependencies approvals">
                         <p class="sidebar-label">Submodule</p>
@@ -1024,7 +1037,7 @@
                     <article class="submodule-card searchable-card" data-search="service desk ticketing client queries callbacks complaints turnaround">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Service desk</h3>
-                        <p>Track calls, complaints and service requests.</p>
+                        <p>Calls, complaints and service requests.</p>
                     </article>
                 </div>
 
@@ -1114,7 +1127,7 @@
                     <div>
                         <span class="eyebrow">Module 07</span>
                         <h2>Billing &amp; Finance</h2>
-                        <p>Manage fee rules, invoices and collections in one cycle.</p>
+                        <p>Fee rules, invoicing and collections.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Fee engine</span>
@@ -1142,17 +1155,17 @@
                     <article class="submodule-card searchable-card" data-search="management fees slabs fee schedules billing rules rebates">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Fee engine</h3>
-                        <p>Apply AUM-based schedules, slabs, rebates and minimums.</p>
+                        <p>AUM schedules, slabs, rebates and minimums.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="invoice run gst tax line items billing cycle delivery">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Invoice run</h3>
-                        <p>Generate invoices with fee breakup, tax and approvals.</p>
+                        <p>Invoices, tax lines and approvals.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="collections receivables aging cash posting revenue recognition">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Receivables control</h3>
-                        <p>Track overdue balances, cash posting and waivers.</p>
+                        <p>Overdues, cash posting and waivers.</p>
                     </article>
                 </div>
 
@@ -1242,7 +1255,7 @@
                     <div>
                         <span class="eyebrow">Module 08</span>
                         <h2>Reporting &amp; Service</h2>
-                        <p>Run statements, tax packs and review material from one desk.</p>
+                        <p>Statements, tax packs and client reviews.</p>
                     </div>
                     <div class="section-chip-group">
                         <span class="chip">Performance books</span>
@@ -1270,17 +1283,17 @@
                     <article class="submodule-card searchable-card" data-search="performance books review decks contribution attribution statements">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Performance books</h3>
-                        <p>Prepare statements, benchmarks and advisor notes.</p>
+                        <p>Statements, benchmarks and advisor notes.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="capital gains tax packs realized pnl audit statements">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Tax pack center</h3>
-                        <p>Assemble capital gains, realized P&amp;L and dividend summaries.</p>
+                        <p>Capital gains, realized P&amp;L and dividend summaries.</p>
                     </article>
                     <article class="submodule-card searchable-card" data-search="service calendar review meetings communication outreach cadence">
                         <p class="sidebar-label">Submodule</p>
                         <h3>Relationship review planner</h3>
-                        <p>Schedule reviews and follow-ups by service tier.</p>
+                        <p>Reviews and follow-ups by service tier.</p>
                     </article>
                 </div>
 
@@ -1368,11 +1381,11 @@
             <section class="panel footer-note searchable-section" data-search="connected operating model wealth management erp advisory onboarding orders compliance finance reporting">
                 <div class="panel-heading">
                     <div>
-                        <p class="sidebar-label">Connected operating model</p>
-                        <h3>Single view across the wealth business</h3>
+                        <p class="sidebar-label">Operating model</p>
+                        <h3>Unified Wealth Management view</h3>
                     </div>
                 </div>
-                <p>One workspace for markets, advice, onboarding, dealing, compliance, billing and reporting.</p>
+                <p>Markets, advisory, onboarding, dealing, compliance, billing and reporting in one ERP.</p>
             </section>
 
             <div class="no-results panel" id="noResults" hidden>
