@@ -235,7 +235,7 @@ function getPreferredTheme() {
         return savedTheme;
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return "dark";
 }
 
 function applyTheme(theme) {
@@ -645,7 +645,7 @@ function applySearchFilter() {
     });
 
     if (!term) {
-        searchFeedback.textContent = "Search markets, clients, orders, billing or reports.";
+        searchFeedback.textContent = "Search flow, markets, clients, orders, billing or reports.";
     } else {
         searchFeedback.textContent = `Showing ${visibleSections} areas for "${term}".`;
     }

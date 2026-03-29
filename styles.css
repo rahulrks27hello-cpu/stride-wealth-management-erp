@@ -654,6 +654,99 @@ body[data-theme="dark"] .workspace::before {
     margin-top: 18px;
 }
 
+.flow-section {
+    margin-top: 18px;
+}
+
+.flow-stage-rail {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+}
+
+.flow-stage {
+    min-width: 188px;
+    flex: 1 0 188px;
+    display: grid;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 22px;
+    border: 1px solid var(--line);
+    background: var(--surface-strong);
+}
+
+.flow-stage h3,
+.lane-card h3,
+.flow-control-band h3 {
+    margin: 0;
+}
+
+.flow-stage p,
+.lane-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.flow-meta {
+    display: inline-flex;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 6px;
+    color: var(--brand);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.flow-arrow {
+    align-self: center;
+    color: var(--accent-muted);
+    font-size: 1.45rem;
+    line-height: 1;
+}
+
+.flow-control-band {
+    margin-top: 18px;
+    padding: 18px 20px;
+    border-radius: 22px;
+    border: 1px dashed var(--line);
+    background: var(--surface);
+}
+
+.flow-control-band h3 {
+    line-height: 1.35;
+}
+
+.flow-lanes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.lane-card,
+.connection-pill {
+    padding: 18px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: var(--surface-strong);
+}
+
+.module-connection-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.connection-pill strong {
+    display: block;
+    line-height: 1.5;
+}
+
 .metric-card {
     padding: 20px;
 }
@@ -820,7 +913,25 @@ body[data-theme="dark"] .workspace::before {
     color: var(--muted);
     font-size: 0.92rem;
     line-height: 1.45;
-    max-width: 34ch;
+    max-width: none;
+}
+
+.module-link-row {
+    gap: 6px;
+}
+
+.module-link-row strong {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.module-link-row strong::after {
+    content: "";
+    flex: 1;
+    min-width: 28px;
+    height: 1px;
+    background: var(--line);
 }
 
 .market-watch-intro {
@@ -1248,6 +1359,15 @@ body[data-theme="dark"] .hero-note {
     .market-watch-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .flow-lanes,
+    .module-connection-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .module-connection-strip > :last-child {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (max-width: 1140px) {
@@ -1345,6 +1465,8 @@ body[data-theme="dark"] .hero-note {
     }
 
     .overview-grid,
+    .flow-lanes,
+    .module-connection-strip,
     .market-watch-grid,
     .market-news-layout,
     .submodule-grid,
@@ -1376,6 +1498,20 @@ body[data-theme="dark"] .hero-note {
 
     .market-watch-intro {
         flex-direction: column;
+    }
+
+    .flow-arrow {
+        display: none;
+    }
+
+    .flow-stage-rail {
+        display: grid;
+        grid-template-columns: 1fr;
+        overflow: visible;
+    }
+
+    .flow-stage {
+        min-width: 0;
     }
 }
 
@@ -1448,6 +1584,14 @@ body[data-theme="dark"] .hero-note {
     .theme-toggle-label,
     .module-tile span {
         font-size: 0.84rem;
+    }
+
+    .module-link-row strong {
+        display: block;
+    }
+
+    .module-link-row strong::after {
+        display: none;
     }
 
     .market-news-controls {
