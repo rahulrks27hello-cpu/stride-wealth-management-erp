@@ -132,6 +132,7 @@ const flowDetailTriggers = Array.from(document.querySelectorAll("[data-flow-titl
 const moduleSections = Array.from(document.querySelectorAll(".module-section"));
 const sections = Array.from(document.querySelectorAll(".searchable-section[id]"));
 const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+const internalSectionLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
 const marketWatchGrid = document.getElementById("marketWatchGrid");
 const marketNewsSlider = document.getElementById("marketNewsSlider");
 const marketNewsList = document.getElementById("marketNewsList");
@@ -929,15 +930,40 @@ if (authShell && closeWelcomeButton && welcomeModal && !welcomeModal.hidden) {
     closeWelcomeButton.focus();
 }
 
-function setSidebarState(isOpen) {
+function setSidebarState(isOpen, options = {}) {
+    const { restoreFocus = true } = options;
     body.classList.toggle("sidebar-open", isOpen);
     pageOverlay.hidden = !isOpen;
     openSidebarButton.setAttribute("aria-expanded", String(isOpen));
 
     if (isOpen) {
         closeSidebarButton.focus();
-    } else {
+    } else if (restoreFocus) {
         openSidebarButton.focus();
+    }
+}
+
+function scrollToSection(sectionId, updateHash = false) {
+    if (!sectionId) {
+        return;
+    }
+
+    const target = document.getElementById(sectionId);
+    if (!target) {
+        return;
+    }
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start"
+    });
+
+    if (updateHash) {
+        const nextHash = `#${sectionId}`;
+        if (window.location.hash !== nextHash) {
+            window.history.pushState(null, "", nextHash);
+        }
     }
 }
 
@@ -975,12 +1001,31 @@ document.addEventListener("click", (event) => {
 });
 
 navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const sectionId = link.getAttribute("href")?.slice(1);
+        scrollToSection(sectionId, true);
+
         if (window.innerWidth <= 1140) {
-            setSidebarState(false);
+            setSidebarState(false, { restoreFocus: false });
         }
     });
 });
+
+internalSectionLinks
+    .filter((link) => !link.classList.contains("nav-link"))
+    .forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const sectionId = link.getAttribute("href")?.slice(1);
+            if (!sectionId) {
+                return;
+            }
+
+            event.preventDefault();
+            scrollToSection(sectionId, true);
+        });
+    });
 
 window.addEventListener("resize", () => {
     if (window.innerWidth > 1140) {
@@ -992,10 +1037,7 @@ window.addEventListener("resize", () => {
 
 document.querySelectorAll("[data-scroll-target]").forEach((button) => {
     button.addEventListener("click", () => {
-        const target = document.getElementById(button.dataset.scrollTarget);
-        if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        scrollToSection(button.dataset.scrollTarget);
     });
 });
 
