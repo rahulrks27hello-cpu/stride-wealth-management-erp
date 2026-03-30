@@ -87,18 +87,37 @@ const openSidebarButton = document.getElementById("openSidebar");
 const closeSidebarButton = document.getElementById("closeSidebar");
 const pageOverlay = document.getElementById("pageOverlay");
 const periodButtons = Array.from(document.querySelectorAll(".period-button"));
-const heroLogo = document.getElementById("heroLogo");
+const themeAwareLogos = Array.from(document.querySelectorAll("[data-light-src][data-dark-src]"));
 const themeToggleButton = document.getElementById("themeToggle");
 const themeToggleLabel = document.querySelector("[data-theme-label]");
 const searchInput = document.getElementById("moduleSearch");
 const searchFeedback = document.getElementById("searchFeedback");
 const noResults = document.getElementById("noResults");
+const authShell = document.getElementById("authShell");
+const authCard = document.querySelector(".auth-card");
+const welcomeModal = document.getElementById("welcomeModal");
+const closeWelcomeButton = document.getElementById("closeWelcome");
+const loginForm = document.getElementById("loginForm");
+const loginSubmitButton = loginForm ? loginForm.querySelector(".auth-submit") : null;
+const loginButtonDefaultLabel = loginSubmitButton ? loginSubmitButton.textContent.trim() : "Login";
+const userIdInput = document.getElementById("userId");
+const userPasswordInput = document.getElementById("userPassword");
+const captchaPrompt = document.getElementById("captchaPrompt");
+const captchaInput = document.getElementById("captchaInput");
+const refreshCaptchaButton = document.getElementById("refreshCaptcha");
+const loginError = document.getElementById("loginError");
+const authLoadingScreen = document.getElementById("authLoadingScreen");
+const authLoadingStatus = document.getElementById("authLoadingStatus");
+const authLoadingBar = document.getElementById("authLoadingBar");
+const authLoadingPercent = document.getElementById("authLoadingPercent");
+const authLoadingSteps = Array.from(document.querySelectorAll("[data-auth-loading-step]"));
 const flowDetailTitle = document.getElementById("flowDetailTitle");
 const flowDetailReceives = document.getElementById("flowDetailReceives");
 const flowDetailSends = document.getElementById("flowDetailSends");
 const flowDetailLinks = document.getElementById("flowDetailLinks");
 const flowDetailPanel = document.getElementById("flowDetailPanel");
 const flowDetailTriggers = Array.from(document.querySelectorAll("[data-flow-title]"));
+const moduleSections = Array.from(document.querySelectorAll(".module-section"));
 const sections = Array.from(document.querySelectorAll(".searchable-section[id]"));
 const navLinks = Array.from(document.querySelectorAll(".nav-link"));
 const marketWatchGrid = document.getElementById("marketWatchGrid");
@@ -113,6 +132,40 @@ const marketReels = [
 ];
 let marketNewsIndex = 0;
 const themeStorageKey = "stride-theme";
+let activeCaptchaCode = "";
+let authLoadingTimers = [];
+const authLoadingMilestones = [
+    {
+        delay: 0,
+        percent: 9,
+        message: "Authenticating your credentials and captcha response.",
+        step: 0
+    },
+    {
+        delay: 1200,
+        percent: 31,
+        message: "Syncing user privileges, advisory books and access policies.",
+        step: 1
+    },
+    {
+        delay: 2500,
+        percent: 58,
+        message: "Loading market watchlists, mandates and active queues.",
+        step: 2
+    },
+    {
+        delay: 3900,
+        percent: 86,
+        message: "Running compliance checks and preparing dashboards.",
+        step: 3
+    },
+    {
+        delay: 4600,
+        percent: 100,
+        message: "Workspace ready. Opening Stride Wealth ERP.",
+        step: 3
+    }
+];
 
 const marketFeed = [
     { symbol: "SENSEX", meta: "BSE 30", unit: "pts", baseValue: 73583.22, value: 73583.22 },
@@ -248,12 +301,12 @@ function applyTheme(theme) {
     const isDark = theme === "dark";
     body.dataset.theme = theme;
 
-    if (heroLogo) {
-        const nextLogo = isDark ? heroLogo.dataset.darkSrc : heroLogo.dataset.lightSrc;
+    themeAwareLogos.forEach((logo) => {
+        const nextLogo = isDark ? logo.dataset.darkSrc : logo.dataset.lightSrc;
         if (nextLogo) {
-            heroLogo.src = nextLogo;
+            logo.src = nextLogo;
         }
-    }
+    });
 
     if (!themeToggleButton) {
         return;
@@ -277,6 +330,360 @@ if (themeToggleButton) {
     });
 }
 
+function createCaptchaCode() {
+    const characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    return Array.from({ length: 5 }, () => characters[Math.floor(Math.random() * characters.length)]).join("");
+}
+
+function renderCaptcha() {
+    activeCaptchaCode = createCaptchaCode();
+    if (captchaPrompt) {
+        captchaPrompt.textContent = activeCaptchaCode;
+    }
+}
+
+function closeWelcomeModal() {
+    if (!welcomeModal) {
+        return;
+    }
+
+    welcomeModal.hidden = true;
+
+    if (!body.classList.contains("is-authenticated") && userIdInput) {
+        userIdInput.focus();
+    }
+}
+
+function clearAuthLoadingTimers() {
+    authLoadingTimers.forEach((timerId) => window.clearTimeout(timerId));
+    authLoadingTimers = [];
+}
+
+function setAuthLoadingStepState(activeStep, percent) {
+    authLoadingSteps.forEach((step, index) => {
+        const isComplete = index < activeStep || (percent >= 100 && index === activeStep);
+        const isActive = index === activeStep && percent < 100;
+        step.classList.toggle("is-complete", isComplete);
+        step.classList.toggle("is-active", isActive);
+    });
+}
+
+function updateAuthLoadingState(percent, message, activeStep) {
+    if (authLoadingBar) {
+        authLoadingBar.style.width = `${percent}%`;
+    }
+
+    if (authLoadingPercent) {
+        authLoadingPercent.textContent = `${percent}%`;
+    }
+
+    if (authLoadingStatus) {
+        authLoadingStatus.textContent = message;
+    }
+
+    if (typeof activeStep === "number") {
+        setAuthLoadingStepState(activeStep, percent);
+    }
+}
+
+function startAuthLoading() {
+    clearAuthLoadingTimers();
+
+    if (authShell) {
+        authShell.setAttribute("aria-busy", "true");
+    }
+
+    if (welcomeModal) {
+        welcomeModal.hidden = true;
+    }
+
+    if (authCard) {
+        authCard.hidden = true;
+    }
+
+    if (authLoadingScreen) {
+        authLoadingScreen.hidden = false;
+        authLoadingScreen.focus();
+    }
+
+    if (loginError) {
+        loginError.textContent = "";
+    }
+
+    if (loginSubmitButton) {
+        loginSubmitButton.disabled = true;
+        loginSubmitButton.textContent = "Signing in...";
+    }
+
+    if (refreshCaptchaButton) {
+        refreshCaptchaButton.disabled = true;
+    }
+
+    updateAuthLoadingState(0, "Initializing secure ERP session.", 0);
+
+    authLoadingMilestones.forEach(({ delay, percent, message, step }) => {
+        const timerId = window.setTimeout(() => {
+            updateAuthLoadingState(percent, message, step);
+        }, delay);
+
+        authLoadingTimers.push(timerId);
+    });
+
+    authLoadingTimers.push(window.setTimeout(unlockWorkspace, 5000));
+}
+
+function unlockWorkspace() {
+    clearAuthLoadingTimers();
+    body.classList.add("is-authenticated");
+
+    if (authShell) {
+        authShell.removeAttribute("aria-busy");
+    }
+
+    if (welcomeModal) {
+        welcomeModal.hidden = true;
+    }
+
+    if (authLoadingScreen) {
+        authLoadingScreen.hidden = true;
+    }
+
+    if (authCard) {
+        authCard.hidden = false;
+    }
+
+    if (loginError) {
+        loginError.textContent = "";
+    }
+
+    if (captchaInput) {
+        captchaInput.value = "";
+    }
+
+    if (loginSubmitButton) {
+        loginSubmitButton.disabled = false;
+        loginSubmitButton.textContent = loginButtonDefaultLabel;
+    }
+
+    if (refreshCaptchaButton) {
+        refreshCaptchaButton.disabled = false;
+    }
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+
+    const userId = userIdInput ? userIdInput.value.trim() : "";
+    const password = userPasswordInput ? userPasswordInput.value : "";
+    const typedCaptcha = captchaInput ? captchaInput.value.trim().toUpperCase() : "";
+    const credentialsAreValid = userId === "stride_admin" && password === "admin ki jai ho";
+    const captchaIsValid = typedCaptcha === activeCaptchaCode;
+
+    if (!credentialsAreValid || !captchaIsValid) {
+        if (loginError) {
+            loginError.textContent = "Check the user ID, password and captcha.";
+        }
+
+        renderCaptcha();
+
+        if (captchaInput) {
+            captchaInput.value = "";
+            captchaInput.focus();
+        }
+
+        return;
+    }
+
+    startAuthLoading();
+}
+
+function slugify(value) {
+    return value
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+function formatInputDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+function formatReportDate(value) {
+    if (!value) {
+        return "Not selected";
+    }
+
+    const parsedDate = new Date(`${value}T00:00:00`);
+    return parsedDate.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+function injectModuleReportBars() {
+    const today = new Date();
+    const fromDate = formatInputDate(new Date(today.getFullYear(), today.getMonth(), 1));
+    const toDate = formatInputDate(today);
+
+    moduleSections.forEach((section, index) => {
+        const anchor = section.querySelector(".module-connection-strip") || section.querySelector(".section-header");
+        if (!anchor || section.querySelector(".module-report-bar")) {
+            return;
+        }
+
+        const sectionId = section.id || `module-${index + 1}`;
+        anchor.insertAdjacentHTML(
+            "afterend",
+            `
+                <div class="module-report-bar" data-report-module="${sectionId}">
+                    <div class="module-report-copy">
+                        <p class="sidebar-label">Download report</p>
+                        <h3>Module report</h3>
+                        <p>Select a date range and download this module summary.</p>
+                    </div>
+                    <div class="module-report-controls">
+                        <label class="report-date-field" for="${sectionId}-from-date">
+                            <span>From</span>
+                            <input id="${sectionId}-from-date" type="date" value="${fromDate}" data-report-from>
+                        </label>
+                        <label class="report-date-field" for="${sectionId}-to-date">
+                            <span>To</span>
+                            <input id="${sectionId}-to-date" type="date" value="${toDate}" data-report-to>
+                        </label>
+                        <button class="primary-button report-download-button" type="button" data-download-report>Download report</button>
+                        <p class="report-status" data-report-status>Ready</p>
+                    </div>
+                </div>
+            `
+        );
+    });
+}
+
+function buildModuleReport(section, fromDate, toDate) {
+    const title = section.querySelector(".section-header h2")?.textContent.trim() || "Module";
+    const headerBlock = section.querySelector(".section-header > div");
+    const summary = headerBlock?.querySelector("p:last-of-type")?.textContent.trim() || "";
+    const moduleTags = Array.from(section.querySelectorAll(".section-chip-group .chip")).map((chip) => chip.textContent.trim());
+    const connections = Array.from(section.querySelectorAll(".module-connection-strip .connection-pill")).map((pill) => {
+        const label = pill.querySelector(".sidebar-label")?.textContent.trim() || "Detail";
+        const value = pill.querySelector("strong")?.textContent.trim() || "";
+        return `${label}: ${value}`;
+    });
+    const submodules = Array.from(section.querySelectorAll(".submodule-card")).map((card) => {
+        const heading = card.querySelector("h3")?.textContent.trim() || "Submodule";
+        const detail = card.querySelector("p:last-of-type")?.textContent.trim() || "";
+        return `${heading} - ${detail}`;
+    });
+    const workAreas = Array.from(section.querySelectorAll(".panel-heading h3")).map((item) => item.textContent.trim());
+    const lines = [
+        "Stride Wealth Management ERP",
+        `${title} Report`,
+        "",
+        `Period: ${formatReportDate(fromDate)} to ${formatReportDate(toDate)}`
+    ];
+
+    if (summary) {
+        lines.push(`Overview: ${summary}`);
+    }
+
+    if (moduleTags.length) {
+        lines.push(`Module focus: ${moduleTags.join(" | ")}`);
+    }
+
+    if (connections.length) {
+        lines.push("", "Cross-module connection", ...connections.map((item) => `- ${item}`));
+    }
+
+    if (submodules.length) {
+        lines.push("", "Submodules", ...submodules.map((item) => `- ${item}`));
+    }
+
+    if (workAreas.length) {
+        lines.push("", "Work areas", ...workAreas.map((item) => `- ${item}`));
+    }
+
+    return lines.join("\n");
+}
+
+function updateReportStatus(statusElement, message, state) {
+    if (!statusElement) {
+        return;
+    }
+
+    statusElement.textContent = message;
+    statusElement.classList.remove("is-error", "is-success");
+
+    if (state) {
+        statusElement.classList.add(state);
+    }
+}
+
+function downloadModuleReport(button) {
+    const section = button.closest(".module-section");
+    const reportBar = button.closest(".module-report-bar");
+    const fromInput = reportBar?.querySelector("[data-report-from]");
+    const toInput = reportBar?.querySelector("[data-report-to]");
+    const statusElement = reportBar?.querySelector("[data-report-status]");
+    const fromDate = fromInput?.value || "";
+    const toDate = toInput?.value || "";
+
+    if (!section || !reportBar || !fromDate || !toDate) {
+        updateReportStatus(statusElement, "Set both dates.", "is-error");
+        return;
+    }
+
+    if (fromDate > toDate) {
+        updateReportStatus(statusElement, "Check the date range.", "is-error");
+        return;
+    }
+
+    const reportText = buildModuleReport(section, fromDate, toDate);
+    const moduleName = section.querySelector(".section-header h2")?.textContent.trim() || "module";
+    const fileName = `stride-${slugify(moduleName)}-report-${fromDate}-to-${toDate}.txt`;
+    const reportBlob = new Blob([reportText], { type: "text/plain;charset=utf-8" });
+    const downloadUrl = window.URL.createObjectURL(reportBlob);
+    const downloadLink = document.createElement("a");
+
+    downloadLink.href = downloadUrl;
+    downloadLink.download = fileName;
+    document.body.append(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+    window.URL.revokeObjectURL(downloadUrl);
+
+    updateReportStatus(statusElement, "Downloaded", "is-success");
+    window.setTimeout(() => updateReportStatus(statusElement, "Ready"), 2600);
+}
+
+renderCaptcha();
+injectModuleReportBars();
+
+if (closeWelcomeButton) {
+    closeWelcomeButton.addEventListener("click", closeWelcomeModal);
+}
+
+if (refreshCaptchaButton) {
+    refreshCaptchaButton.addEventListener("click", () => {
+        renderCaptcha();
+        if (captchaInput) {
+            captchaInput.focus();
+        }
+    });
+}
+
+if (loginForm) {
+    loginForm.addEventListener("submit", handleLogin);
+}
+
+if (authShell && closeWelcomeButton && welcomeModal && !welcomeModal.hidden) {
+    closeWelcomeButton.focus();
+}
+
 function setSidebarState(isOpen) {
     body.classList.toggle("sidebar-open", isOpen);
     pageOverlay.hidden = !isOpen;
@@ -294,9 +701,27 @@ closeSidebarButton.addEventListener("click", () => setSidebarState(false));
 pageOverlay.addEventListener("click", () => setSidebarState(false));
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && body.classList.contains("sidebar-open")) {
+    if (event.key !== "Escape") {
+        return;
+    }
+
+    if (welcomeModal && !welcomeModal.hidden) {
+        closeWelcomeModal();
+        return;
+    }
+
+    if (body.classList.contains("sidebar-open")) {
         setSidebarState(false);
     }
+});
+
+document.addEventListener("click", (event) => {
+    const reportButton = event.target.closest("[data-download-report]");
+    if (!reportButton) {
+        return;
+    }
+
+    downloadModuleReport(reportButton);
 });
 
 navLinks.forEach((link) => {

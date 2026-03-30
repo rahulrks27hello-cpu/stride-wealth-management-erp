@@ -4,9 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stride Wealth Management ERP</title>
-    <link rel="stylesheet" href="styles.css?v=20260329-2">
+    <link rel="stylesheet" href="styles.css?v=20260330-4">
 </head>
 <body>
+    <div class="auth-shell" id="authShell">
+        <div class="welcome-modal" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+            <div class="welcome-card">
+                <button class="welcome-close" id="closeWelcome" type="button" aria-label="Close welcome message">&times;</button>
+                <img src="Stride.png" alt="Stride logo" class="welcome-logo">
+                <p class="welcome-caption" id="welcomeTitle">Welcome to Stride Wealth ERP</p>
+            </div>
+        </div>
+
+        <section class="auth-card" aria-labelledby="loginTitle">
+            <img src="Stride1.png" alt="Stride Wealth Management ERP logo" class="auth-logo" data-light-src="Stride1.png" data-dark-src="Stride2.png">
+            <p class="eyebrow">Secure access</p>
+            <h1 id="loginTitle">Stride Wealth Management ERP</h1>
+            <p class="auth-copy">Enter your user ID, password and captcha to continue.</p>
+
+            <form class="auth-form" id="loginForm">
+                <label class="auth-field" for="userId">
+                    <span>User ID</span>
+                    <input id="userId" name="userId" type="text" autocomplete="username">
+                </label>
+
+                <label class="auth-field" for="userPassword">
+                    <span>Password</span>
+                    <input id="userPassword" name="password" type="password" autocomplete="current-password">
+                </label>
+
+                <div class="captcha-row">
+                    <div class="captcha-box" aria-live="polite">
+                        <span class="sidebar-label">Captcha</span>
+                        <strong id="captchaPrompt">STRD1</strong>
+                    </div>
+                    <button class="captcha-refresh" id="refreshCaptcha" type="button">Refresh</button>
+                </div>
+
+                <label class="auth-field" for="captchaInput">
+                    <span>Enter captcha</span>
+                    <input id="captchaInput" name="captcha" type="text" inputmode="text" autocomplete="off" autocapitalize="characters">
+                </label>
+
+                <p class="auth-error" id="loginError" role="status" aria-live="polite"></p>
+
+                <button class="primary-button auth-submit" type="submit">Login</button>
+            </form>
+        </section>
+
+        <section class="auth-loading-screen" id="authLoadingScreen" aria-labelledby="authLoadingTitle" aria-live="polite" tabindex="-1" hidden>
+            <div class="auth-loading-card">
+                <div class="auth-loading-top">
+                    <img src="Stride1.png" alt="Stride Wealth Management ERP logo" class="auth-loading-logo" data-light-src="Stride1.png" data-dark-src="Stride2.png">
+                    <span class="auth-loading-badge">Secure sign-in gateway</span>
+                </div>
+
+                <div class="auth-loading-hero">
+                    <div class="auth-loading-spinner" aria-hidden="true"></div>
+                    <div>
+                        <p class="eyebrow">Signing in</p>
+                        <h2 id="authLoadingTitle">Loading your ERP workspace</h2>
+                        <p class="auth-loading-copy" id="authLoadingStatus">Initializing secure ERP session.</p>
+                    </div>
+                </div>
+
+                <div class="auth-loading-progress" aria-hidden="true">
+                    <span class="auth-loading-progress-bar" id="authLoadingBar"></span>
+                </div>
+
+                <div class="auth-loading-meta">
+                    <strong id="authLoadingPercent">0%</strong>
+                    <span>Estimated wait: 5 seconds</span>
+                </div>
+
+                <div class="auth-loading-steps">
+                    <article class="auth-loading-step is-active" data-auth-loading-step>
+                        <span class="auth-loading-step-dot" aria-hidden="true"></span>
+                        <div>
+                            <strong>Identity verification</strong>
+                            <p>Confirming credentials and captcha response.</p>
+                        </div>
+                    </article>
+                    <article class="auth-loading-step" data-auth-loading-step>
+                        <span class="auth-loading-step-dot" aria-hidden="true"></span>
+                        <div>
+                            <strong>Role and policy sync</strong>
+                            <p>Loading advisory permissions and access scopes.</p>
+                        </div>
+                    </article>
+                    <article class="auth-loading-step" data-auth-loading-step>
+                        <span class="auth-loading-step-dot" aria-hidden="true"></span>
+                        <div>
+                            <strong>Data and queue warmup</strong>
+                            <p>Preparing market feeds, mandates and operating queues.</p>
+                        </div>
+                    </article>
+                    <article class="auth-loading-step" data-auth-loading-step>
+                        <span class="auth-loading-step-dot" aria-hidden="true"></span>
+                        <div>
+                            <strong>Control engine startup</strong>
+                            <p>Running compliance checks and readying dashboards.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <div class="app-shell">
         <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
             <div class="sidebar-header">
@@ -1395,6 +1499,6 @@
         </main>
     </div>
 
-    <script src="app.js?v=20260329-2"></script>
+    <script src="app.js?v=20260330-4"></script>
 </body>
 </html>

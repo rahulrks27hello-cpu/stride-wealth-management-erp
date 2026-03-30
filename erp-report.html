@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stride Wealth Management ERP Report</title>
+    <style>
+        :root {
+            --ink: #182334;
+            --muted: #5f6f86;
+            --line: #d9e0ea;
+            --brand: #0f3d73;
+            --soft: #f4f7fb;
+            --panel: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #eef2f7;
+            color: var(--ink);
+            font-family: "Aptos", "Segoe UI", Arial, sans-serif;
+            line-height: 1.65;
+        }
+
+        .report-shell {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 32px 20px 48px;
+        }
+
+        .page,
+        section {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+        }
+
+        .page + section,
+        section + section { margin-top: 20px; }
+
+        .cover {
+            padding: 44px;
+            background:
+                radial-gradient(circle at top right, rgba(15, 61, 115, 0.08), transparent 18rem),
+                linear-gradient(180deg, #ffffff, #f7f9fc);
+        }
+
+        .cover-logo { width: min(360px, 100%); margin-bottom: 24px; }
+
+        .kicker,
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--brand);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        h1, h2, h3 { margin: 0; line-height: 1.15; }
+        h1 { font-size: 2.8rem; letter-spacing: -0.04em; margin-bottom: 12px; }
+        h2 { font-size: 1.7rem; margin-bottom: 14px; }
+        h3 { font-size: 1.18rem; margin-bottom: 10px; }
+        p { margin: 0 0 12px; }
+
+        .lead { max-width: 70ch; color: var(--muted); font-size: 1.05rem; }
+
+        .meta-grid,
+        .summary-grid,
+        .benefit-grid,
+        .role-grid,
+        .module-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .meta-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 28px; }
+        .summary-grid,
+        .benefit-grid,
+        .role-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .module-grid { grid-template-columns: 1fr; }
+
+        .meta-card,
+        .info-card,
+        .module-card {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: var(--soft);
+        }
+
+        .module-card { background: #ffffff; }
+
+        .meta-card strong,
+        .info-card strong { display: block; margin-bottom: 6px; }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .module-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(15, 61, 115, 0.08);
+            color: var(--brand);
+            font-size: 0.86rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .module-note { color: var(--muted); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 0.96rem;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--line);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th { background: #f6f8fb; font-weight: 700; }
+
+        ul,
+        ol {
+            margin: 10px 0 0 20px;
+            padding: 0;
+        }
+
+        li + li { margin-top: 8px; }
+
+        .flow-table td:first-child,
+        .flow-table td:nth-child(2) {
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        .footer-note { color: var(--muted); font-size: 0.94rem; }
+        a { color: var(--brand); }
+
+        @media (max-width: 900px) {
+            .meta-grid,
+            .summary-grid,
+            .benefit-grid,
+            .role-grid { grid-template-columns: 1fr; }
+
+            .module-header { flex-direction: column; }
+        }
+
+        @media print {
+            body { background: #ffffff; }
+            .report-shell { max-width: none; padding: 0; }
+            .page, section {
+                box-shadow: none;
+                border-radius: 0;
+                border: 0;
+                padding: 0;
+            }
+            .page {
+                min-height: 100vh;
+                padding: 24mm 18mm 18mm;
+                page-break-after: always;
+            }
+            section {
+                padding: 14mm 18mm 10mm;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-shell">
+        <div class="page cover">
+            <p class="kicker">ERP Design Report</p>
+            <img src="Stride1.png" alt="Stride Wealth Management logo" class="cover-logo">
+            <h1>Stride Wealth Management ERP</h1>
+            <p class="lead">
+                A sector-specific Enterprise Resource Planning system designed for Wealth Management firms to manage advisory,
+                onboarding, dealing, compliance, operations, billing and reporting on one integrated platform.
+            </p>
+
+            <div class="meta-grid">
+                <div class="meta-card">
+                    <strong>Company Name</strong>
+                    <span>Stride Wealth Management</span>
+                </div>
+                <div class="meta-card">
+                    <strong>Industry</strong>
+                    <span>Wealth Management and Financial Advisory</span>
+                </div>
+                <div class="meta-card">
+                    <strong>Primary Logo</strong>
+                    <span>Stride1.png</span>
+                </div>
+                <div class="meta-card">
+                    <strong>Website</strong>
+                    <span><a href="https://stride-wealth-management-erp.vercel.app/">https://stride-wealth-management-erp.vercel.app/</a></span>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <p class="eyebrow">1. Company Profile</p>
+            <h2>Stride Wealth Management</h2>
+            <p>
+                Stride Wealth Management is positioned as a modern Wealth Management company serving high-net-worth individuals,
+                family offices, trusts and advisory mandates. The business model combines investment advisory, portfolio construction,
+                dealing support, compliance control, client servicing and fee administration.
+            </p>
+            <p>
+                The ERP has been designed to give all operating teams a shared working environment. Instead of each department working
+                on separate files, mails and spreadsheets, the ERP centralizes client records, portfolio actions, orders, controls,
+                settlement status, invoices and reporting packs.
+            </p>
+
+            <div class="summary-grid">
+                <div class="info-card">
+                    <strong>Business Identity</strong>
+                    <p>Stride Wealth Management</p>
+                </div>
+                <div class="info-card">
+                    <strong>Live Website</strong>
+                    <p><a href="https://stride-wealth-management-erp.vercel.app/">stride-wealth-management-erp.vercel.app</a></p>
+                </div>
+                <div class="info-card">
+                    <strong>Logo Use</strong>
+                    <p>Primary cover and report logo: Stride1.png. Supporting brand marks in the ERP use Stride and Stride2 variants.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p class="eyebrow">2. Industry Overview</p>
+            <h2>Why Wealth Management needs an ERP</h2>
+            <p>
+                Wealth Management is a service-intensive financial sector that manages client assets, investment advice, cash allocation,
+                execution support, regulatory controls, service communication and fee billing. Unlike a generic finance system, a Wealth
+                Management ERP must handle both front-office and control-office processes together.
+            </p>
+            <p>
+                The sector deals with sensitive client records, regulated investment activity and frequent coordination between relationship
+                managers, advisors, dealers, compliance teams, operations teams, finance teams and client service teams. This creates a strong
+                need for a unified ERP that connects all records and removes process gaps.
+            </p>
+
+            <div class="summary-grid">
+                <div class="info-card">
+                    <strong>Front-office focus</strong>
+                    <p>Client acquisition, onboarding, advisory meetings, model selection and rebalancing decisions.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Control-office focus</strong>
+                    <p>KYC, AML, suitability, mandate checks, exception handling and audit tracking.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Back-office focus</strong>
+                    <p>Settlement, documentation, invoicing, collections, statements, review packs and service delivery.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p class="eyebrow">3. Key Business Operations</p>
+            <h2>Core operating activities in Wealth Management</h2>
+            <ol>
+                <li>Client acquisition and onboarding through referrals, lead handling, KYC and mandate setup.</li>
+                <li>Portfolio planning based on client goals, risk appetite, investment policy statements and house views.</li>
+                <li>Trade execution support through order capture, approvals, dealing and settlement follow-up.</li>
+                <li>Regulatory and internal control monitoring through AML, suitability, policy checks and audit logs.</li>
+                <li>Operational servicing through document management, workflow routing, service tickets and SLA tracking.</li>
+                <li>Fee administration through AUM-linked billing, invoicing, receivables and collection monitoring.</li>
+                <li>Client reporting through statements, tax packs, performance books, review meetings and service communication.</li>
+            </ol>
+        </section>
+
+        <section>
+            <p class="eyebrow">4. ERP Objectives</p>
+            <h2>Design goals of the proposed ERP</h2>
+            <div class="benefit-grid">
+                <div class="info-card">
+                    <strong>Single client record</strong>
+                    <p>Create one client master for advisory, compliance, finance and reporting teams.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Clear information flow</strong>
+                    <p>Move data from onboarding to portfolio, orders, operations, billing and reporting without duplication.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Control integration</strong>
+                    <p>Keep Risk and Compliance embedded across the full operating chain instead of as a separate afterthought.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Operational speed</strong>
+                    <p>Reduce turnaround time for onboarding, approvals, settlement support and reporting delivery.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Audit readiness</strong>
+                    <p>Maintain traceable client, order, exception and billing records for review and control purposes.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Professional service delivery</strong>
+                    <p>Support a high-touch client model through statements, review packs and service tracking.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p class="eyebrow">5. Main ERP Modules and Submodules</p>
+            <h2>Module architecture of the Stride Wealth Management ERP</h2>
+            <div class="module-grid">
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 01: Market Watch</h3>
+                            <p class="module-note">Supports market awareness and investment context for the advisory and dealing teams.</p>
+                        </div>
+                        <span class="module-chip">Front-office intelligence</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Benchmark indices</td>
+                                <td>Tracks Sensex, Nifty 50 and other market indicators.</td>
+                                <td>Advisory desk, dealers</td>
+                            </tr>
+                            <tr>
+                                <td>Sector pulse</td>
+                                <td>Monitors sector leadership, rotation and volatility.</td>
+                                <td>Advisory desk, investment committee</td>
+                            </tr>
+                            <tr>
+                                <td>Market news feed</td>
+                                <td>Captures relevant market headlines that may affect portfolio actions.</td>
+                                <td>Relationship managers, advisors, dealers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Daily market view, benchmark context and sector-level signals.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 02: CRM &amp; Onboarding</h3>
+                            <p class="module-note">Creates and maintains the foundational client record used across the ERP.</p>
+                        </div>
+                        <span class="module-chip">Client foundation</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lead desk</td>
+                                <td>Records referrals, segments prospects and assigns relationship managers.</td>
+                                <td>Relationship managers, business development team</td>
+                            </tr>
+                            <tr>
+                                <td>KYC &amp; suitability</td>
+                                <td>Handles identity checks, FATCA, AML, PEP screening and risk profiling.</td>
+                                <td>Onboarding team, compliance team</td>
+                            </tr>
+                            <tr>
+                                <td>Client 360</td>
+                                <td>Provides a single household view with holdings, notes and service details.</td>
+                                <td>Relationship managers, advisory desk, service team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Client master, mandate setup, service profile and KYC pack.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 03: Portfolio &amp; Advisory</h3>
+                            <p class="module-note">Converts client goals and mandate rules into investable portfolio actions.</p>
+                        </div>
+                        <span class="module-chip">Advisory engine</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mandate &amp; IPS center</td>
+                                <td>Stores investment policy statements, ranges and client restrictions.</td>
+                                <td>Advisors, investment team</td>
+                            </tr>
+                            <tr>
+                                <td>Model portfolio library</td>
+                                <td>Maintains approved house views, models and product lists.</td>
+                                <td>Investment committee, advisory desk</td>
+                            </tr>
+                            <tr>
+                                <td>Rebalancing studio</td>
+                                <td>Detects drift and prepares rebalance or cash deployment actions.</td>
+                                <td>Advisors, portfolio managers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Advice note, model allocation, rebalance action and trade proposal.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 04: Order Management</h3>
+                            <p class="module-note">Manages order capture, approvals, dealing and settlement hand-off.</p>
+                        </div>
+                        <span class="module-chip">Execution engine</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Trade blotter</td>
+                                <td>Captures advisory orders, batch orders and dealing instructions.</td>
+                                <td>Dealers, advisors</td>
+                            </tr>
+                            <tr>
+                                <td>Approval routing</td>
+                                <td>Checks cash availability, concentration limits and suitability requirements.</td>
+                                <td>Dealers, compliance team</td>
+                            </tr>
+                            <tr>
+                                <td>Settlement &amp; custody</td>
+                                <td>Tracks allocation, contract notes and custodian confirmation.</td>
+                                <td>Operations team, dealer support</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Trade ticket, execution status, cash movement and settlement trail.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 05: Risk &amp; Compliance</h3>
+                            <p class="module-note">Acts as the control layer across onboarding, advisory, orders, operations and billing.</p>
+                        </div>
+                        <span class="module-chip">Control layer</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>AML &amp; screening</td>
+                                <td>Checks sanctions, PEP, adverse media and suspicious patterns.</td>
+                                <td>AML analysts, compliance desk</td>
+                            </tr>
+                            <tr>
+                                <td>Suitability engine</td>
+                                <td>Matches products and orders to the client risk profile and mandate rules.</td>
+                                <td>Compliance team, advisory operations</td>
+                            </tr>
+                            <tr>
+                                <td>Stress testing &amp; audit</td>
+                                <td>Runs concentration, liquidity and scenario checks while preserving evidence trails.</td>
+                                <td>Risk team, internal control team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Approval status, exception log, breach action and audit evidence.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 06: Operations &amp; Workflow</h3>
+                            <p class="module-note">Supports back-office settlement, document movement and service execution.</p>
+                        </div>
+                        <span class="module-chip">Back-office operations</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Document vault</td>
+                                <td>Stores mandates, agreements, proofs and statements with expiry monitoring.</td>
+                                <td>Operations team, onboarding team</td>
+                            </tr>
+                            <tr>
+                                <td>Workflow orchestration</td>
+                                <td>Routes approvals, escalations, dependencies and SLA timers.</td>
+                                <td>Operations team, managers</td>
+                            </tr>
+                            <tr>
+                                <td>Service desk</td>
+                                <td>Tracks calls, complaints, callbacks and service tickets.</td>
+                                <td>Client service team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Settlement confirmation, workflow status, document status and service task log.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 07: Billing &amp; Finance</h3>
+                            <p class="module-note">Handles fee calculation, invoice preparation and receivable management.</p>
+                        </div>
+                        <span class="module-chip">Revenue management</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fee engine</td>
+                                <td>Applies AUM schedules, slabs, rebates and minimum fee rules.</td>
+                                <td>Finance team, billing operations</td>
+                            </tr>
+                            <tr>
+                                <td>Invoice run</td>
+                                <td>Generates invoices with tax lines, approvals and delivery status.</td>
+                                <td>Finance team, controller</td>
+                            </tr>
+                            <tr>
+                                <td>Receivables control</td>
+                                <td>Tracks aging, cash posting, overdue accounts and waivers.</td>
+                                <td>Finance team, collections team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Invoice batch, receivable trail, revenue realization and exception status.</p>
+                </article>
+
+                <article class="module-card">
+                    <div class="module-header">
+                        <div>
+                            <h3>Module 08: Reporting &amp; Service</h3>
+                            <p class="module-note">Publishes client-facing outputs and supports ongoing relationship management.</p>
+                        </div>
+                        <span class="module-chip">Client delivery</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Submodule</th>
+                                <th>Purpose</th>
+                                <th>Primary users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Performance books</td>
+                                <td>Builds statements, benchmark views and advisor commentary packs.</td>
+                                <td>Reporting team, advisors</td>
+                            </tr>
+                            <tr>
+                                <td>Tax pack center</td>
+                                <td>Prepares capital gains, realized P&amp;L and dividend summaries.</td>
+                                <td>Reporting operations, finance support</td>
+                            </tr>
+                            <tr>
+                                <td>Relationship review planner</td>
+                                <td>Schedules review meetings, follow-ups and service-tier outreach.</td>
+                                <td>Relationship managers, service team</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Key output:</strong> Statements, tax packs, review decks, service history and client communication.</p>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <p class="eyebrow">6. Module Connections and Information Flow</p>
+            <h2>How the modules are connected</h2>
+            <p>
+                The Stride Wealth Management ERP has been designed as a connected operating chain rather than isolated departments. Each
+                module either creates a core record, enriches that record, checks that record, or delivers an output based on that record.
+            </p>
+
+            <ol>
+                <li><strong>Market Watch</strong> creates the market context used by advisors and dealers.</li>
+                <li><strong>CRM &amp; Onboarding</strong> creates the client master, KYC record and mandate profile.</li>
+                <li><strong>Portfolio &amp; Advisory</strong> uses the client master and market view to create portfolio advice.</li>
+                <li><strong>Order Management</strong> turns approved advice into executable trade instructions and captures execution results.</li>
+                <li><strong>Operations &amp; Workflow</strong> confirms settlement, documents and service actions linked to those trades.</li>
+                <li><strong>Billing &amp; Finance</strong> uses mandate terms, AUM and trade activity to generate invoices and track collections.</li>
+                <li><strong>Reporting &amp; Service</strong> combines all client, portfolio, trade and fee records into client-facing outputs.</li>
+                <li><strong>Risk &amp; Compliance</strong> monitors onboarding, advice, trading, settlement and billing exceptions across all stages.</li>
+            </ol>
+
+            <table class="flow-table">
+                <thead>
+                    <tr>
+                        <th>From module</th>
+                        <th>To module</th>
+                        <th>Information passed</th>
+                        <th>Business purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Market Watch</td>
+                        <td>Portfolio &amp; Advisory</td>
+                        <td>House view, benchmark context, sector tone</td>
+                        <td>Supports model selection and rebalance decisions.</td>
+                    </tr>
+                    <tr>
+                        <td>CRM &amp; Onboarding</td>
+                        <td>Portfolio &amp; Advisory</td>
+                        <td>Client master, risk profile, mandate terms</td>
+                        <td>Provides the planning base for client-specific advice.</td>
+                    </tr>
+                    <tr>
+                        <td>CRM &amp; Onboarding</td>
+                        <td>Risk &amp; Compliance</td>
+                        <td>KYC, FATCA, AML and onboarding documents</td>
+                        <td>Enables regulatory checks before activation.</td>
+                    </tr>
+                    <tr>
+                        <td>Portfolio &amp; Advisory</td>
+                        <td>Order Management</td>
+                        <td>Trade proposal, rebalance instruction, IPS rules</td>
+                        <td>Converts advice into executable orders.</td>
+                    </tr>
+                    <tr>
+                        <td>Order Management</td>
+                        <td>Risk &amp; Compliance</td>
+                        <td>Orders, product choice, cash check and exceptions</td>
+                        <td>Ensures suitability and pre-deal control clearance.</td>
+                    </tr>
+                    <tr>
+                        <td>Order Management</td>
+                        <td>Operations &amp; Workflow</td>
+                        <td>Executed trades, contract notes, settlement instructions</td>
+                        <td>Moves execution into settlement and back-office processing.</td>
+                    </tr>
+                    <tr>
+                        <td>Operations &amp; Workflow</td>
+                        <td>Billing &amp; Finance</td>
+                        <td>Settlement confirmation, activity status, workflow outcomes</td>
+                        <td>Supports invoice readiness and fee recognition.</td>
+                    </tr>
+                    <tr>
+                        <td>Billing &amp; Finance</td>
+                        <td>Reporting &amp; Service</td>
+                        <td>Invoice values, receivable status, fee realization</td>
+                        <td>Adds billing and collection visibility to client reporting.</td>
+                    </tr>
+                    <tr>
+                        <td>All operating modules</td>
+                        <td>Reporting &amp; Service</td>
+                        <td>Client, portfolio, trade, settlement and fee data</td>
+                        <td>Creates statements, review packs and tax reports.</td>
+                    </tr>
+                    <tr>
+                        <td>Risk &amp; Compliance</td>
+                        <td>All connected modules</td>
+                        <td>Approvals, holds, breach actions, audit notes</td>
+                        <td>Keeps the entire ERP compliant and controlled.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <p class="eyebrow">7. Shared Records Across the ERP</p>
+            <h2>Core records that connect departments</h2>
+            <div class="summary-grid">
+                <div class="info-card">
+                    <strong>Client master and mandate</strong>
+                    <p>Created in CRM &amp; Onboarding and used by Portfolio, Risk, Billing and Reporting.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Trade and settlement trail</strong>
+                    <p>Created by Order Management and confirmed by Operations for downstream finance and reporting use.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Revenue and service trail</strong>
+                    <p>Built from invoices, collections, review activity and service events for management and client visibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p class="eyebrow">8. Departments and User Roles</p>
+            <h2>Main teams using the ERP</h2>
+            <div class="role-grid">
+                <div class="info-card">
+                    <strong>Relationship managers</strong>
+                    <p>Own leads, client contact, service coordination and review follow-up.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Advisory desk</strong>
+                    <p>Creates portfolio actions, uses market context and manages model decisions.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Dealers</strong>
+                    <p>Handle order capture, approvals, execution and dealing cut-offs.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Compliance and risk officers</strong>
+                    <p>Run AML, suitability, mandate checks, surveillance and audit monitoring.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Operations team</strong>
+                    <p>Manages settlement, documents, workflow queues and service tickets.</p>
+                </div>
+                <div class="info-card">
+                    <strong>Finance and reporting teams</strong>
+                    <p>Manage fees, invoices, receivables, statements, tax packs and reporting output.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <p class="eyebrow">9. Benefits of the Proposed ERP</p>
+            <h2>Why this ERP design is suitable for the industry</h2>
+            <ul>
+                <li>It reflects the actual workflow of a Wealth Management company from lead intake to client reporting.</li>
+                <li>It connects front-office, control-office and back-office processes on a shared operating model.</li>
+                <li>It reduces manual duplication by keeping one client master and one trade trail across departments.</li>
+                <li>It embeds compliance and risk controls inside day-to-day processing instead of placing them outside the workflow.</li>
+                <li>It improves professionalism in client servicing by linking billing, reporting and service follow-up.</li>
+                <li>It is suitable for academic submission because it clearly shows modules, submodules and information flow between departments.</li>
+            </ul>
+        </section>
+
+        <section>
+            <p class="eyebrow">10. Conclusion</p>
+            <h2>Final statement</h2>
+            <p>
+                The Stride Wealth Management ERP is a complete sector-specific ERP design for the Wealth Management industry. It demonstrates
+                how a single ERP can support onboarding, advisory, execution, compliance, operations, finance and reporting in one connected
+                system. The design is practical, professional and aligned with the way a real Wealth Management company would operate.
+            </p>
+            <p class="footer-note">
+                Suggested submission use: open this HTML file in a browser, review the content, and export it as PDF through the browser print menu.
+            </p>
+        </section>
+    </div>
+</body>
+</html>
