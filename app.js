@@ -90,6 +90,7 @@ const periodButtons = Array.from(document.querySelectorAll(".period-button"));
 const themeAwareLogos = Array.from(document.querySelectorAll("[data-light-src][data-dark-src]"));
 const themeToggleButton = document.getElementById("themeToggle");
 const themeToggleLabel = document.querySelector("[data-theme-label]");
+const logoutButton = document.getElementById("logoutButton");
 const searchInput = document.getElementById("moduleSearch");
 const searchFeedback = document.getElementById("searchFeedback");
 const noResults = document.getElementById("noResults");
@@ -101,6 +102,16 @@ const closeWelcomeButton = document.getElementById("closeWelcome");
 const loginForm = document.getElementById("loginForm");
 const loginSubmitButton = loginForm ? loginForm.querySelector(".auth-submit") : null;
 const loginButtonDefaultLabel = loginSubmitButton ? loginSubmitButton.textContent.trim() : "Login";
+const forgotPasswordModal = document.getElementById("forgotPasswordModal");
+const openForgotPasswordButton = document.getElementById("openForgotPassword");
+const closeForgotPasswordButton = document.getElementById("closeForgotPassword");
+const cancelForgotPasswordButton = document.getElementById("cancelForgotPassword");
+const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+const forgotPasswordStatus = document.getElementById("forgotPasswordStatus");
+const forgotUserIdInput = document.getElementById("forgotUserId");
+const forgotEmailInput = document.getElementById("forgotEmail");
+const forgotMobileInput = document.getElementById("forgotMobile");
+const forgotDeskInput = document.getElementById("forgotDesk");
 const userIdInput = document.getElementById("userId");
 const userPasswordInput = document.getElementById("userPassword");
 const captchaPrompt = document.getElementById("captchaPrompt");
@@ -136,6 +147,7 @@ const themeStorageKey = "stride-theme";
 let activeCaptchaCode = "";
 let authLoadingTimers = [];
 const startupSplashDuration = 1350;
+const reportDownloadDelay = 5000;
 const authLoadingMilestones = [
     {
         delay: 0,
@@ -357,6 +369,86 @@ function closeWelcomeModal() {
     }
 }
 
+function openForgotPasswordModal() {
+    if (!forgotPasswordModal) {
+        return;
+    }
+
+    forgotPasswordModal.hidden = false;
+
+    if (forgotPasswordStatus) {
+        forgotPasswordStatus.textContent = "";
+        forgotPasswordStatus.classList.remove("is-success");
+    }
+
+    if (forgotUserIdInput) {
+        forgotUserIdInput.focus();
+    }
+}
+
+function closeForgotPasswordModal() {
+    if (!forgotPasswordModal) {
+        return;
+    }
+
+    forgotPasswordModal.hidden = true;
+
+    if (forgotPasswordStatus) {
+        forgotPasswordStatus.textContent = "";
+        forgotPasswordStatus.classList.remove("is-success");
+    }
+
+    if (!body.classList.contains("is-authenticated") && openForgotPasswordButton) {
+        openForgotPasswordButton.focus();
+    }
+}
+
+function setForgotPasswordPendingState(isPending) {
+    if (!forgotPasswordForm) {
+        return;
+    }
+
+    forgotPasswordForm.querySelectorAll("input, button").forEach((control) => {
+        control.disabled = isPending;
+    });
+}
+
+function updateForgotPasswordStatus(message, isSuccess = false) {
+    if (!forgotPasswordStatus) {
+        return;
+    }
+
+    forgotPasswordStatus.textContent = message;
+    forgotPasswordStatus.classList.toggle("is-success", isSuccess);
+}
+
+function handleForgotPassword(event) {
+    event.preventDefault();
+
+    const userId = forgotUserIdInput?.value.trim() || "";
+    const email = forgotEmailInput?.value.trim() || "";
+    const mobile = forgotMobileInput?.value.trim() || "";
+    const desk = forgotDeskInput?.value.trim() || "";
+
+    if (!userId || !email || !mobile || !desk) {
+        updateForgotPasswordStatus("Enter user ID, registered email, mobile and branch/desk.");
+        return;
+    }
+
+    if (!email.includes("@")) {
+        updateForgotPasswordStatus("Enter a valid registered email address.");
+        return;
+    }
+
+    setForgotPasswordPendingState(true);
+    updateForgotPasswordStatus("Validating registered details and raising reset request...");
+
+    window.setTimeout(() => {
+        setForgotPasswordPendingState(false);
+        updateForgotPasswordStatus("Reset request raised. A reset link or temporary access note will be sent after security validation.", true);
+    }, 2200);
+}
+
 function showWelcomeModal() {
     if (startupSplash) {
         startupSplash.classList.add("is-exiting");
@@ -384,6 +476,82 @@ function showWelcomeModal() {
 function clearAuthLoadingTimers() {
     authLoadingTimers.forEach((timerId) => window.clearTimeout(timerId));
     authLoadingTimers = [];
+}
+
+function resetAuthExperience() {
+    clearAuthLoadingTimers();
+
+    body.classList.remove("is-authenticated", "sidebar-open");
+    pageOverlay.hidden = true;
+    openSidebarButton.setAttribute("aria-expanded", "false");
+
+    if (authShell) {
+        authShell.removeAttribute("aria-busy");
+    }
+
+    if (authLoadingScreen) {
+        authLoadingScreen.hidden = true;
+    }
+
+    if (welcomeModal) {
+        welcomeModal.classList.remove("is-visible");
+        welcomeModal.hidden = true;
+    }
+
+    if (forgotPasswordModal) {
+        forgotPasswordModal.hidden = true;
+    }
+
+    if (authCard) {
+        authCard.hidden = false;
+    }
+
+    if (startupSplash) {
+        startupSplash.hidden = true;
+        startupSplash.classList.remove("is-exiting");
+    }
+
+    if (loginForm) {
+        loginForm.reset();
+    }
+
+    if (forgotPasswordForm) {
+        forgotPasswordForm.reset();
+    }
+
+    if (loginError) {
+        loginError.textContent = "";
+    }
+
+    if (forgotPasswordStatus) {
+        forgotPasswordStatus.textContent = "";
+        forgotPasswordStatus.classList.remove("is-success");
+    }
+
+    if (loginSubmitButton) {
+        loginSubmitButton.disabled = false;
+        loginSubmitButton.textContent = loginButtonDefaultLabel;
+    }
+
+    if (refreshCaptchaButton) {
+        refreshCaptchaButton.disabled = false;
+    }
+
+    setForgotPasswordPendingState(false);
+    renderCaptcha();
+
+    if (searchInput) {
+        searchInput.value = "";
+        applySearchFilter();
+    }
+
+    if (userIdInput) {
+        userIdInput.focus();
+    }
+}
+
+function handleLogout() {
+    resetAuthExperience();
 }
 
 function setAuthLoadingStepState(activeStep, percent) {
@@ -650,6 +818,21 @@ function updateReportStatus(statusElement, message, state) {
     }
 }
 
+function setReportBarPendingState(reportBar, isPending) {
+    if (!reportBar) {
+        return;
+    }
+
+    reportBar.querySelectorAll("input, button").forEach((control) => {
+        control.disabled = isPending;
+    });
+
+    const downloadButton = reportBar.querySelector("[data-download-report]");
+    if (downloadButton) {
+        downloadButton.textContent = isPending ? "Preparing..." : "Download report";
+    }
+}
+
 function downloadModuleReport(button) {
     const section = button.closest(".module-section");
     const reportBar = button.closest(".module-report-bar");
@@ -669,22 +852,28 @@ function downloadModuleReport(button) {
         return;
     }
 
-    const reportText = buildModuleReport(section, fromDate, toDate);
-    const moduleName = section.querySelector(".section-header h2")?.textContent.trim() || "module";
-    const fileName = `stride-${slugify(moduleName)}-report-${fromDate}-to-${toDate}.txt`;
-    const reportBlob = new Blob([reportText], { type: "text/plain;charset=utf-8" });
-    const downloadUrl = window.URL.createObjectURL(reportBlob);
-    const downloadLink = document.createElement("a");
+    setReportBarPendingState(reportBar, true);
+    updateReportStatus(statusElement, "Fetching required data...");
 
-    downloadLink.href = downloadUrl;
-    downloadLink.download = fileName;
-    document.body.append(downloadLink);
-    downloadLink.click();
-    downloadLink.remove();
-    window.URL.revokeObjectURL(downloadUrl);
+    window.setTimeout(() => {
+        const reportText = buildModuleReport(section, fromDate, toDate);
+        const moduleName = section.querySelector(".section-header h2")?.textContent.trim() || "module";
+        const fileName = `stride-${slugify(moduleName)}-report-${fromDate}-to-${toDate}.txt`;
+        const reportBlob = new Blob([reportText], { type: "text/plain;charset=utf-8" });
+        const downloadUrl = window.URL.createObjectURL(reportBlob);
+        const downloadLink = document.createElement("a");
 
-    updateReportStatus(statusElement, "Downloaded", "is-success");
-    window.setTimeout(() => updateReportStatus(statusElement, "Ready"), 2600);
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.append(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        window.URL.revokeObjectURL(downloadUrl);
+
+        setReportBarPendingState(reportBar, false);
+        updateReportStatus(statusElement, "Downloaded", "is-success");
+        window.setTimeout(() => updateReportStatus(statusElement, "Ready"), 2600);
+    }, reportDownloadDelay);
 }
 
 renderCaptcha();
@@ -706,6 +895,34 @@ if (refreshCaptchaButton) {
 
 if (loginForm) {
     loginForm.addEventListener("submit", handleLogin);
+}
+
+if (openForgotPasswordButton) {
+    openForgotPasswordButton.addEventListener("click", openForgotPasswordModal);
+}
+
+if (closeForgotPasswordButton) {
+    closeForgotPasswordButton.addEventListener("click", closeForgotPasswordModal);
+}
+
+if (cancelForgotPasswordButton) {
+    cancelForgotPasswordButton.addEventListener("click", closeForgotPasswordModal);
+}
+
+if (forgotPasswordForm) {
+    forgotPasswordForm.addEventListener("submit", handleForgotPassword);
+}
+
+if (forgotPasswordModal) {
+    forgotPasswordModal.addEventListener("click", (event) => {
+        if (event.target === forgotPasswordModal) {
+            closeForgotPasswordModal();
+        }
+    });
+}
+
+if (logoutButton) {
+    logoutButton.addEventListener("click", handleLogout);
 }
 
 if (authShell && closeWelcomeButton && welcomeModal && !welcomeModal.hidden) {
@@ -730,6 +947,11 @@ pageOverlay.addEventListener("click", () => setSidebarState(false));
 
 document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") {
+        return;
+    }
+
+    if (forgotPasswordModal && !forgotPasswordModal.hidden) {
+        closeForgotPasswordModal();
         return;
     }
 

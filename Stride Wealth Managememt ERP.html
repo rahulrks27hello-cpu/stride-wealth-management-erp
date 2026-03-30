@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stride Wealth Management ERP</title>
-    <link rel="stylesheet" href="styles.css?v=20260331-2">
+    <link rel="stylesheet" href="styles.css?v=20260331-4">
 </head>
 <body>
     <div class="auth-shell" id="authShell">
@@ -53,11 +53,72 @@
                     <input id="captchaInput" name="captcha" type="text" inputmode="text" autocomplete="off" autocapitalize="characters">
                 </label>
 
+                <div class="auth-support-row">
+                    <button class="auth-link-button" id="openForgotPassword" type="button">Forgot password?</button>
+                    <span>Raise a reset request using registered details.</span>
+                </div>
+
                 <p class="auth-error" id="loginError" role="status" aria-live="polite"></p>
 
                 <button class="primary-button auth-submit" type="submit">Login</button>
             </form>
         </section>
+
+        <div class="forgot-password-modal" id="forgotPasswordModal" role="dialog" aria-modal="true" aria-labelledby="forgotPasswordTitle" hidden>
+            <section class="forgot-password-card">
+                <button class="welcome-close forgot-password-close" id="closeForgotPassword" type="button" aria-label="Close password reset panel">&times;</button>
+                <p class="eyebrow">Account recovery</p>
+                <h2 id="forgotPasswordTitle">Reset access for Stride Wealth ERP</h2>
+                <p class="forgot-password-copy">Verify your registered information to raise a secure password reset request.</p>
+
+                <div class="forgot-password-process">
+                    <article class="forgot-password-process-item">
+                        <strong>1. Verify identity</strong>
+                        <p>Confirm your user ID and registered contact details.</p>
+                    </article>
+                    <article class="forgot-password-process-item">
+                        <strong>2. Raise request</strong>
+                        <p>Submit a reset request for the security desk to validate.</p>
+                    </article>
+                    <article class="forgot-password-process-item">
+                        <strong>3. Restore access</strong>
+                        <p>Receive a reset link or temporary access instructions.</p>
+                    </article>
+                </div>
+
+                <form class="forgot-password-form" id="forgotPasswordForm">
+                    <div class="forgot-password-grid">
+                        <label class="auth-field" for="forgotUserId">
+                            <span>User ID</span>
+                            <input id="forgotUserId" name="forgotUserId" type="text" autocomplete="username">
+                        </label>
+
+                        <label class="auth-field" for="forgotEmail">
+                            <span>Registered email</span>
+                            <input id="forgotEmail" name="forgotEmail" type="email" autocomplete="email" placeholder="name@stridewealth.com">
+                        </label>
+
+                        <label class="auth-field" for="forgotMobile">
+                            <span>Registered mobile</span>
+                            <input id="forgotMobile" name="forgotMobile" type="tel" inputmode="tel" placeholder="+91">
+                        </label>
+
+                        <label class="auth-field" for="forgotDesk">
+                            <span>Branch or desk</span>
+                            <input id="forgotDesk" name="forgotDesk" type="text" placeholder="Advisory desk / branch">
+                        </label>
+                    </div>
+
+                    <p class="forgot-password-note">Security validation is completed against registered contact records before a reset is released.</p>
+                    <p class="auth-error forgot-password-status" id="forgotPasswordStatus" role="status" aria-live="polite"></p>
+
+                    <div class="forgot-password-actions">
+                        <button class="secondary-button" id="cancelForgotPassword" type="button">Back to login</button>
+                        <button class="primary-button" id="submitForgotPassword" type="submit">Raise reset request</button>
+                    </div>
+                </form>
+            </section>
+        </div>
 
         <section class="auth-loading-screen" id="authLoadingScreen" aria-labelledby="authLoadingTitle" aria-live="polite" tabindex="-1" hidden>
             <div class="auth-loading-card">
@@ -188,6 +249,8 @@
                         </span>
                         <span class="theme-toggle-label" data-theme-label>Light mode</span>
                     </button>
+
+                    <button class="secondary-button logout-button" id="logoutButton" type="button">Log out</button>
 
                     <div class="period-switch" role="group" aria-label="Overview period">
                         <button class="period-button is-selected" type="button" data-period="today">Today</button>
@@ -1506,6 +1569,6 @@
         </main>
     </div>
 
-    <script src="app.js?v=20260331-2"></script>
+    <script src="app.js?v=20260331-4"></script>
 </body>
 </html>

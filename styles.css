@@ -181,6 +181,28 @@ body[data-theme="dark"] .auth-shell::before {
     text-align: left;
 }
 
+.auth-support-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+.auth-link-button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--brand);
+    font-weight: 700;
+}
+
+.auth-link-button:hover,
+.auth-link-button:focus-visible {
+    text-decoration: underline;
+}
+
 .auth-field {
     display: grid;
     gap: 8px;
@@ -293,6 +315,97 @@ body[data-theme="dark"] .startup-line-track {
         0 0 18px rgba(79, 127, 201, 0.35),
         0 0 34px rgba(121, 171, 255, 0.24);
     animation: startup-line-fill 1.35s cubic-bezier(0.2, 0.82, 0.24, 1) forwards;
+}
+
+.forgot-password-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(8, 15, 28, 0.42);
+    backdrop-filter: blur(12px);
+}
+
+.forgot-password-card {
+    position: relative;
+    width: min(100%, 720px);
+    display: grid;
+    gap: 20px;
+    padding: 42px 36px 34px;
+    border-radius: 34px;
+    border: 1px solid var(--line);
+    background: var(--surface-solid);
+    box-shadow: var(--shadow);
+}
+
+body[data-theme="dark"] .forgot-password-card {
+    background: rgba(15, 23, 42, 0.98);
+}
+
+.forgot-password-card h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+}
+
+.forgot-password-copy,
+.forgot-password-note {
+    margin: 0;
+    color: var(--muted);
+}
+
+.forgot-password-process {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.forgot-password-process-item {
+    padding: 16px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+}
+
+.forgot-password-process-item strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.forgot-password-process-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.forgot-password-form {
+    display: grid;
+    gap: 16px;
+}
+
+.forgot-password-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.forgot-password-status {
+    min-height: 1.2em;
+}
+
+.forgot-password-status.is-success {
+    color: var(--success);
+}
+
+.forgot-password-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.forgot-password-close {
+    color: var(--ink);
 }
 
 .auth-loading-screen {
@@ -1036,6 +1149,16 @@ body[data-theme="dark"] .workspace::before {
 .secondary-button {
     background: var(--brand-soft);
     color: var(--brand);
+}
+
+.logout-button {
+    white-space: nowrap;
+}
+
+.logout-button:hover,
+.logout-button:focus-visible {
+    background: rgba(180, 35, 24, 0.12);
+    color: var(--danger);
 }
 
 .chip {
@@ -1785,6 +1908,12 @@ body[data-theme="dark"] .workspace::before {
     color: var(--ink);
 }
 
+.report-date-field input:disabled,
+.report-download-button:disabled {
+    opacity: 0.72;
+    cursor: wait;
+}
+
 .report-download-button {
     min-width: 160px;
 }
@@ -2243,6 +2372,26 @@ body[data-theme="dark"] .hero-note {
 
     .captcha-row {
         flex-direction: column;
+    }
+
+    .auth-support-row,
+    .forgot-password-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .forgot-password-modal {
+        padding: 16px;
+    }
+
+    .forgot-password-card {
+        padding: 34px 22px 24px;
+        border-radius: 28px;
+    }
+
+    .forgot-password-process,
+    .forgot-password-grid {
+        grid-template-columns: 1fr;
     }
 
     .captcha-refresh {
