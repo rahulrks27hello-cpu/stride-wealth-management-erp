@@ -246,6 +246,55 @@ body[data-theme="dark"] .auth-shell::before {
     cursor: wait;
 }
 
+.startup-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(8, 15, 28, 0.16);
+    backdrop-filter: blur(8px);
+    transition: opacity 0.32s ease, visibility 0.32s ease;
+}
+
+.startup-splash.is-exiting {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.startup-line-shell {
+    position: relative;
+    width: min(84vw, 980px);
+    height: 4px;
+}
+
+.startup-line-track,
+.startup-line-progress {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+}
+
+.startup-line-track {
+    background: rgba(15, 61, 115, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(15, 61, 115, 0.06);
+}
+
+body[data-theme="dark"] .startup-line-track {
+    background: rgba(121, 171, 255, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(121, 171, 255, 0.08);
+}
+
+.startup-line-progress {
+    width: 0;
+    background: linear-gradient(90deg, #0f3d73 0%, #4f7fc9 45%, #79abff 100%);
+    box-shadow:
+        0 0 18px rgba(79, 127, 201, 0.35),
+        0 0 34px rgba(121, 171, 255, 0.24);
+    animation: startup-line-fill 1.35s cubic-bezier(0.2, 0.82, 0.24, 1) forwards;
+}
+
 .auth-loading-screen {
     position: relative;
     z-index: 1;
@@ -407,6 +456,16 @@ body[data-theme="dark"] .auth-loading-card {
     }
 }
 
+@keyframes startup-line-fill {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
 .welcome-modal {
     position: fixed;
     inset: 0;
@@ -416,6 +475,12 @@ body[data-theme="dark"] .auth-loading-card {
     padding: 24px;
     background: rgba(8, 15, 28, 0.42);
     backdrop-filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.32s ease;
+}
+
+.welcome-modal.is-visible {
+    opacity: 1;
 }
 
 .welcome-card {
@@ -429,6 +494,14 @@ body[data-theme="dark"] .auth-loading-card {
     display: grid;
     justify-items: center;
     gap: 28px;
+    opacity: 0;
+    transform: translateY(26px) scale(0.96);
+    transition: transform 0.42s cubic-bezier(0.2, 0.9, 0.24, 1), opacity 0.42s ease;
+}
+
+.welcome-modal.is-visible .welcome-card {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
 body[data-theme="dark"] .welcome-card {
@@ -2178,6 +2251,14 @@ body[data-theme="dark"] .hero-note {
 
     .welcome-modal {
         padding: 16px;
+    }
+
+    .startup-splash {
+        padding: 16px;
+    }
+
+    .startup-line-shell {
+        width: min(88vw, 520px);
     }
 
     .welcome-card {

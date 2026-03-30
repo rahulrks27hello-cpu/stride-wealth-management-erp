@@ -94,6 +94,7 @@ const searchInput = document.getElementById("moduleSearch");
 const searchFeedback = document.getElementById("searchFeedback");
 const noResults = document.getElementById("noResults");
 const authShell = document.getElementById("authShell");
+const startupSplash = document.getElementById("startupSplash");
 const authCard = document.querySelector(".auth-card");
 const welcomeModal = document.getElementById("welcomeModal");
 const closeWelcomeButton = document.getElementById("closeWelcome");
@@ -134,6 +135,7 @@ let marketNewsIndex = 0;
 const themeStorageKey = "stride-theme";
 let activeCaptchaCode = "";
 let authLoadingTimers = [];
+const startupSplashDuration = 1350;
 const authLoadingMilestones = [
     {
         delay: 0,
@@ -347,10 +349,35 @@ function closeWelcomeModal() {
         return;
     }
 
+    welcomeModal.classList.remove("is-visible");
     welcomeModal.hidden = true;
 
     if (!body.classList.contains("is-authenticated") && userIdInput) {
         userIdInput.focus();
+    }
+}
+
+function showWelcomeModal() {
+    if (startupSplash) {
+        startupSplash.classList.add("is-exiting");
+    }
+
+    if (welcomeModal) {
+        welcomeModal.hidden = false;
+        window.requestAnimationFrame(() => {
+            welcomeModal.classList.add("is-visible");
+        });
+    }
+
+    if (startupSplash) {
+        window.setTimeout(() => {
+            startupSplash.hidden = true;
+            startupSplash.classList.remove("is-exiting");
+        }, 320);
+    }
+
+    if (!body.classList.contains("is-authenticated") && closeWelcomeButton) {
+        window.setTimeout(() => closeWelcomeButton.focus(), 220);
     }
 }
 
@@ -662,6 +689,7 @@ function downloadModuleReport(button) {
 
 renderCaptcha();
 injectModuleReportBars();
+window.setTimeout(showWelcomeModal, startupSplashDuration);
 
 if (closeWelcomeButton) {
     closeWelcomeButton.addEventListener("click", closeWelcomeModal);

@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stride Wealth Management ERP</title>
-    <link rel="stylesheet" href="styles.css?v=20260330-5">
+    <link rel="stylesheet" href="styles.css?v=20260331-2">
 </head>
 <body>
     <div class="auth-shell" id="authShell">
-        <div class="welcome-modal" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+        <div class="startup-splash" id="startupSplash" aria-live="polite">
+            <div class="startup-line-shell" aria-hidden="true">
+                <span class="startup-line-track"></span>
+                <span class="startup-line-progress"></span>
+            </div>
+        </div>
+
+        <div class="welcome-modal" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" hidden>
             <div class="welcome-card">
                 <button class="welcome-close" id="closeWelcome" type="button" aria-label="Close welcome message">&times;</button>
                 <img src="Stride.png" alt="Stride logo" class="welcome-logo">
@@ -1499,6 +1506,6 @@
         </main>
     </div>
 
-    <script src="app.js?v=20260330-4"></script>
+    <script src="app.js?v=20260331-2"></script>
 </body>
 </html>
