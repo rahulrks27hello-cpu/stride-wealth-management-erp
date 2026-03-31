@@ -309,7 +309,7 @@ function getPreferredTheme() {
         return savedTheme;
     }
 
-    return "dark";
+    return "light";
 }
 
 function applyTheme(theme) {
