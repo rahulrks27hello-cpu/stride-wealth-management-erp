@@ -672,7 +672,7 @@ function handleLogin(event) {
     const userId = userIdInput ? userIdInput.value.trim() : "";
     const password = userPasswordInput ? userPasswordInput.value : "";
     const typedCaptcha = captchaInput ? captchaInput.value.trim().toUpperCase() : "";
-    const credentialsAreValid = userId === "stride_admin" && password === "admin ki jai ho";
+    const credentialsAreValid = userId === "stride_admin" && password === "strideerp2026";
     const captchaIsValid = typedCaptcha === activeCaptchaCode;
 
     if (!credentialsAreValid || !captchaIsValid) {
